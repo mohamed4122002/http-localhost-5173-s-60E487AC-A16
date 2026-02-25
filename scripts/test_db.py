@@ -1,5 +1,11 @@
 import asyncio
+import os
+import sys
 from motor.motor_asyncio import AsyncIOMotorClient
+
+# Add working directory to sys.path to find backend
+sys.path.append(os.getcwd())
+
 from backend.config import settings
 
 async def check_db():
