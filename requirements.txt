@@ -12,3 +12,5 @@ email-validator
 pandas
 openpyxl
 httpx
+gunicorn
+uvicorn[standard]
