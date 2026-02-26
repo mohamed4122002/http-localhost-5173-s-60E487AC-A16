@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../services/api';
 import { motion } from 'framer-motion';
-import { ShieldCheck, ArrowRight, User, Mail, Lock, Loader2 } from 'lucide-react';
+import { ArrowRight, User, Mail, Lock, Loader2 } from 'lucide-react';
 
 export default function SignUp() {
   const [username, setUsername] = useState('');
@@ -19,6 +19,7 @@ export default function SignUp() {
     try {
       const response = await auth.signup({ username, email, password });
       localStorage.setItem('token', response.access_token);
+      localStorage.setItem('role', response.role || 'user');
       navigate('/dashboard');
     } catch (err) {
       setError('Unable to sign up. Username may already be taken.');
@@ -50,9 +51,13 @@ export default function SignUp() {
         className="relative z-10 w-full max-w-lg bg-white rounded-[2.5rem] p-12 border border-slate-200 shadow-xl"
       >
         <div className="flex flex-col items-center mb-10">
-          <div className="w-16 h-16 rounded-2xl bg-brand-blue flex items-center justify-center shadow-lg shadow-brand-blue/20 mb-6">
-            <ShieldCheck className="text-white w-8 h-8" />
-          </div>
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="w-20 h-20 rounded-[2rem] bg-white flex items-center justify-center shadow-xl border border-slate-100 mb-8 overflow-hidden"
+          >
+            <img src="/brand/logo-icon.png" alt="Logo" className="w-12 h-12 object-contain" />
+          </motion.div>
           <h1 className="text-4xl font-display font-black text-slate-900 text-center">
             Create <span className="text-brand-blue">Account</span>
           </h1>

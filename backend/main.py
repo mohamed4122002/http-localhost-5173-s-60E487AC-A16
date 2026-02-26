@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.database import db
-from backend.routers import auth, templates, surveys, tokens, public, webhook, analytics
+from backend.routers import auth, templates, surveys, tokens, public, webhook, analytics, users
 from backend.utils.logging_utils import setup_logging, LoggingMiddleware
 
 @asynccontextmanager
@@ -48,6 +48,7 @@ app.include_router(tokens.router)
 app.include_router(public.router)
 app.include_router(webhook.router)
 app.include_router(analytics.router)
+app.include_router(users.router)
 
 @app.get("/")
 async def root():

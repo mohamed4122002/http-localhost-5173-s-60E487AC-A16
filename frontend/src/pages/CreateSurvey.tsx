@@ -48,7 +48,7 @@ export default function CreateSurvey() {
       return;
     }
     if (currentStep === 2 && !formData.template_id) {
-      toast.error('Please select an implementation blueprint');
+      toast.error('Please select a survey template');
       return;
     }
     setCurrentStep(prev => Math.min(prev + 1, 3));
@@ -59,12 +59,12 @@ export default function CreateSurvey() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.template_id) {
-      toast.error('Please select an implementation blueprint');
+      toast.error('Please select a survey template');
       return;
     }
 
     if (formData.link_count <= 0) {
-      toast.error('Respondent Pipeline cannot be empty. Please provision at least 1 link.');
+      toast.error('Response limit cannot be empty. Please set at least 1 response.');
       return;
     }
 
@@ -73,10 +73,10 @@ export default function CreateSurvey() {
     try {
       const res = await surveys.create(formData);
       setSuccessData(res);
-      toast.success('Survey environment and tokens provisioned successfully');
+      toast.success('Survey created successfully');
     } catch (err) {
       console.error(err);
-      toast.error('Failed to initialize survey project');
+      toast.error('Failed to start survey project');
     } finally {
       setLoading(false);
     }
@@ -100,7 +100,7 @@ export default function CreateSurvey() {
               <ArrowLeft className="w-4 h-4" />
             </Link>
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
-              Provisioning <span className="text-brand-blue">Engine</span>
+              Survey <span className="text-brand-blue">Setup</span>
             </div>
           </div>
           <h1 className="text-4xl font-display font-black tracking-tight text-slate-900">
@@ -145,9 +145,9 @@ export default function CreateSurvey() {
                   <div className="space-y-1 text-left">
                     <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-600">
                       <ShieldCheck className="w-4 h-4" />
-                      Protocol Synchronized
+                      Survey Ready
                     </div>
-                    <h2 className="text-3xl font-display font-black text-slate-900">Link <span className="text-brand-blue">Studio</span></h2>
+                    <h2 className="text-3xl font-display font-black text-slate-900">Survey <span className="text-brand-blue">Links</span></h2>
                   </div>
                   <button
                     onClick={() => navigate('/dashboard')}
@@ -180,7 +180,7 @@ export default function CreateSurvey() {
                         className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-blue hover:text-blue-700 transition-colors"
                       >
                         <Download className="w-3 h-3" />
-                        Download Registry
+                        Download List
                       </button>
                     </div>
                     <div className="space-y-3">
@@ -214,7 +214,7 @@ export default function CreateSurvey() {
                 </div>
 
                 <div className="p-8 bg-slate-50 border-t border-slate-100 flex items-center justify-center gap-4">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">System ready for deployment.</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Survey is ready for distribution.</p>
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-sm" />
                 </div>
               </div>
@@ -233,21 +233,24 @@ export default function CreateSurvey() {
               className="space-y-8"
             >
               {currentStep === 1 && (
-                <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-xl text-left">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="p-2.5 rounded-xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10">
-                      <Layout className="w-5 h-5" />
+                <div className="bg-white rounded-[3rem] p-12 border border-slate-100 shadow-premium text-left relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8 opacity-[0.03]">
+                    <Layout className="w-32 h-32 rotate-12" />
+                  </div>
+                  <div className="flex items-center gap-4 mb-10 relative z-10">
+                    <div className="p-3.5 rounded-2xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10 shadow-inner-soft">
+                      <Layout className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl font-display font-black text-slate-900">Project <span className="text-brand-blue">Identity</span></h3>
+                    <h3 className="text-2xl font-display font-black text-slate-900">General <span className="text-brand-blue">Info</span></h3>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-8">
+                  <div className="grid grid-cols-1 gap-10 relative z-10">
                     <div className="space-y-4">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Enterprise Entity Name</label>
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Company Name</label>
                       <input
                         type="text"
                         placeholder="e.g. Global Research Corp"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-5 text-slate-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/5 transition-all font-bold placeholder:text-slate-300 text-lg shadow-inner"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-[1.5rem] px-8 py-6 text-slate-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/5 transition-all font-bold placeholder:text-slate-300 text-xl shadow-inner-soft"
                         value={formData.company_name}
                         onChange={e => setFormData({ ...formData, company_name: e.target.value })}
                         required
@@ -255,19 +258,19 @@ export default function CreateSurvey() {
                     </div>
 
                     <div className="space-y-4">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Respondent Pipeline</label>
+                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Response Limit</label>
                       <div className="relative group">
-                        <Sparkles className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-brand-blue transition-colors pointer-events-none" />
+                        <Sparkles className="absolute left-8 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within:text-brand-blue transition-colors pointer-events-none" />
                         <input
                           type="number"
                           min="1"
                           max="1000"
-                          placeholder="Number of links to provision"
-                          className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-6 py-5 text-slate-900 focus:outline-none focus:border-brand-blue/50 transition-all font-bold text-lg shadow-inner"
+                          placeholder="Provision volume"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-[1.5rem] pl-16 pr-8 py-6 text-slate-900 focus:outline-none focus:border-brand-blue/50 transition-all font-bold text-xl shadow-inner-soft placeholder:text-slate-300"
                           value={formData.link_count}
                           onChange={e => setFormData({ ...formData, link_count: parseInt(e.target.value) || 0 })}
                         />
-                        <div className="absolute right-6 top-1/2 -translate-y-1/2 text-[10px] font-black uppercase tracking-widest text-slate-300 group-focus-within:text-brand-blue transition-colors text-right">
+                        <div className="absolute right-8 top-1/2 -translate-y-1/2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 group-focus-within:text-brand-blue transition-colors text-right">
                           Keys
                         </div>
                       </div>
@@ -282,7 +285,7 @@ export default function CreateSurvey() {
                     <div className="p-2.5 rounded-xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10">
                       <Database className="w-5 h-5" />
                     </div>
-                    <h3 className="text-xl font-display font-black text-slate-900">Blueprint <span className="text-brand-blue">Selection</span></h3>
+                    <h3 className="text-xl font-display font-black text-slate-900">Template <span className="text-brand-blue">Selection</span></h3>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -350,7 +353,7 @@ export default function CreateSurvey() {
                       <div className={`p-4 rounded-xl border transition-all ${formData.google_form_url.includes('{token}') ? 'bg-emerald-50 border-emerald-100' : 'bg-brand-red/5 border-brand-red/10'}`}>
                         <div className="flex items-center gap-2 mb-1">
                           {formData.google_form_url.includes('{token}') ? <Check className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-brand-red" />}
-                          <span className={`text-[10px] font-black uppercase tracking-widest leading-none ${formData.google_form_url.includes('{token}') ? 'text-emerald-700' : 'text-brand-red'}`}>URL Integrity</span>
+                          <span className={`text-[10px] font-black uppercase tracking-widest leading-none ${formData.google_form_url.includes('{token}') ? 'text-emerald-700' : 'text-brand-red'}`}>URL Configuration</span>
                         </div>
                         <p className="text-[10px] font-bold text-slate-400">
                           {formData.google_form_url.includes('{token}') ? "Token injection verified." : "Placeholder {token} missing in URL."}
@@ -404,22 +407,22 @@ export default function CreateSurvey() {
 
         {/* Navigation Sidebar */}
         <div className="space-y-6">
-          <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl sticky top-24 text-left">
-            <h3 className="text-xl font-display font-black mb-8 text-slate-900">Phase <span className="text-brand-blue">Control</span></h3>
+          <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-premium sticky top-24 text-left">
+            <h3 className="text-2xl font-display font-black mb-10 text-slate-900">Phase <span className="text-brand-blue">Control</span></h3>
 
-            <div className="space-y-6 mb-10">
+            <div className="space-y-8 mb-12">
               {steps.map(s => (
-                <div key={s.id} className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${currentStep === s.id ? 'bg-brand-blue text-white shadow-xl rotate-3' :
+                <div key={s.id} className="flex items-center gap-4">
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 ${currentStep === s.id ? 'bg-brand-blue text-white shadow-xl rotate-3' :
                     currentStep > s.id ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-slate-50 text-slate-300'
                     }`}>
-                    {currentStep > s.id ? <Check className="w-5 h-5" /> : <s.icon className="w-5 h-5" />}
+                    {currentStep > s.id ? <Check className="w-6 h-6" /> : <s.icon className="w-6 h-6" />}
                   </div>
                   <div className="flex flex-col">
-                    <span className={`text-[10px] font-black uppercase tracking-widest ${currentStep >= s.id ? 'text-slate-900' : 'text-slate-300'}`}>
+                    <span className={`text-[11px] font-black uppercase tracking-[0.2em] ${currentStep >= s.id ? 'text-slate-900' : 'text-slate-300'}`}>
                       {s.name}
                     </span>
-                    <span className={`text-[8px] font-bold uppercase tracking-tight ${currentStep === s.id ? 'text-brand-blue animate-pulse' : 'text-slate-400'}`}>
+                    <span className={`text-[9px] font-bold uppercase tracking-widest ${currentStep === s.id ? 'text-brand-blue animate-pulse' : 'text-slate-400'}`}>
                       {currentStep === s.id ? 'Active Operation' : currentStep > s.id ? 'Sync Verified' : 'Locked'}
                     </span>
                   </div>
@@ -427,12 +430,12 @@ export default function CreateSurvey() {
               ))}
             </div>
 
-            <div className="space-y-4 pt-8 border-t border-slate-100">
+            <div className="space-y-4 pt-10 border-t border-slate-100">
               {currentStep < 3 ? (
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="w-full py-5 bg-brand-blue text-white rounded-[1.5rem] flex items-center justify-center gap-3 group shadow-xl hover:shadow-brand-blue/20 transition-all font-black tracking-widest uppercase text-xs"
+                  className="w-full py-6 bg-brand-blue text-white rounded-[1.5rem] flex items-center justify-center gap-4 group shadow-xl shadow-brand-blue/10 hover:shadow-brand-blue/30 transition-all font-black tracking-[0.2em] uppercase text-[10px]"
                 >
                   Continue to {steps[currentStep].name}
                   <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -441,12 +444,12 @@ export default function CreateSurvey() {
                 <button
                   onClick={handleSubmit}
                   disabled={loading}
-                  className="w-full py-5 bg-emerald-600 text-white rounded-[1.5rem] hover:bg-emerald-700 flex items-center justify-center gap-3 group font-black tracking-widest uppercase text-xs shadow-xl hover:shadow-emerald-200 transition-all"
+                  className="w-full py-6 bg-emerald-600 text-white rounded-[1.5rem] hover:bg-emerald-700 flex items-center justify-center gap-4 group font-black tracking-[0.2em] uppercase text-[10px] shadow-xl hover:shadow-emerald-200 transition-all"
                 >
-                  {loading ? <Sparkles className="w-5 h-5 animate-spin" /> : (
+                  {loading ? <Sparkles className="w-6 h-6 animate-spin" /> : (
                     <>
-                      Initialize Deployment
-                      <Check className="w-5 h-5 animate-in zoom-in" />
+                      Create Survey
+                      <Check className="w-6 h-6 animate-in zoom-in" />
                     </>
                   )}
                 </button>
@@ -455,9 +458,9 @@ export default function CreateSurvey() {
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="w-full py-4 text-slate-400 hover:text-slate-900 transition-all font-black tracking-widest uppercase text-[10px] flex items-center justify-center gap-2"
+                  className="w-full py-4 text-slate-400 hover:text-slate-900 transition-all font-black tracking-[0.2em] uppercase text-[9px] flex items-center justify-center gap-2"
                 >
-                  <ArrowLeft className="w-3 h-3" />
+                  <ArrowLeft className="w-4 h-4" />
                   Step Back
                 </button>
               )}
@@ -468,10 +471,10 @@ export default function CreateSurvey() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="mt-8 p-6 bg-slate-50 border border-slate-100 rounded-3xl"
+                  className="mt-10 p-6 bg-slate-50 border border-slate-100 rounded-[2rem] shadow-inner-soft"
                 >
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Active Blueprint</p>
-                  <p className="text-xs font-black text-slate-900 truncate bg-white px-3 py-2 rounded-xl border border-slate-100 shadow-sm">{currentTemplate.name}</p>
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">Active Blueprint</p>
+                  <p className="text-xs font-black text-slate-900 truncate bg-white px-4 py-3 rounded-xl border border-slate-100 shadow-sm">{currentTemplate.name}</p>
                 </motion.div>
               )}
             </AnimatePresence>

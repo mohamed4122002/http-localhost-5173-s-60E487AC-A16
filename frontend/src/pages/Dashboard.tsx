@@ -129,7 +129,7 @@ export default function Dashboard() {
               <BarChart3 className="w-5 h-5" />
             </div>
             <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 font-display">
-              System <span className="text-brand-blue">Integrity</span> Control
+              Campaign <span className="text-brand-blue">Management</span>
             </div>
           </div>
           <h1 className="text-5xl font-display font-black tracking-tight leading-none text-slate-900">
@@ -162,88 +162,98 @@ export default function Dashboard() {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <MetricCard
-          title="Active Tracks"
+          title="Total Campaigns"
           value={stats.total_surveys}
           icon={Layers}
           trend="+12% vs last month"
           color="coral"
+          delay={0.1}
         />
         <MetricCard
-          title="Live Sessions"
+          title="Active Surveys"
           value={stats.active_surveys}
           icon={Zap}
           trend="Currently live"
           color="cyan"
+          delay={0.2}
         />
         <MetricCard
-          title="Qualified Sync"
+          title="Total Responses"
           value={stats.total_responses.toLocaleString()}
           icon={CheckCircle2}
           trend={`${stats.match_rate}% match rate`}
           color="grey"
+          delay={0.3}
         />
         <MetricCard
-          title="Protocol Uptime"
-          value={`${stats.uptime}%`}
+          title="System Status"
+          value={`Online`}
           icon={Clock}
-          trend="Sub-100ms latency"
+          trend="All systems nominal"
           color="blue"
+          delay={0.4}
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Activity Chart */}
-        <div className="lg:col-span-2 glass-card rounded-[2.5rem] p-10 border border-slate-200 relative overflow-hidden group">
+        <div className="lg:col-span-2 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-premium relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-8">
-            <div className="w-16 h-16 bg-brand-blue/5 rounded-full blur-2xl group-hover:bg-brand-blue/10 transition-all duration-700"></div>
+            <div className="w-24 h-24 bg-brand-blue/5 rounded-full blur-3xl group-hover:bg-brand-blue/10 transition-all duration-1000"></div>
           </div>
-          <div className="flex items-center justify-between mb-10">
+          <div className="flex items-center justify-between mb-10 relative z-10">
             <div>
               <h3 className="text-2xl font-black font-display text-slate-900">Engagement Volume</h3>
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Cross-platform participation metrics</p>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Real-time participation metrics</p>
             </div>
-            <div className="flex items-center gap-2 text-[10px] font-black tracking-widest text-brand-blue bg-brand-blue/10 border border-brand-blue/20 px-4 py-2 rounded-full">
+            <div className="flex items-center gap-2 text-[10px] font-black tracking-widest text-brand-blue bg-brand-blue/5 border border-brand-blue/10 px-5 py-2.5 rounded-2xl shadow-inner-soft">
               <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
               LIVE SYNC
             </div>
           </div>
-          <div className="h-[320px]">
+          <div className="h-[320px] relative z-10">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
+                <CartesianGrid strokeDasharray="8 8" stroke="#E2E8F0" vertical={false} />
                 <XAxis
                   dataKey="name"
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: '#475569', fontSize: 10, fontWeight: 800 }}
+                  tick={{ fill: '#94A3B8', fontSize: 10, fontWeight: 900 }}
                   dy={15}
                 />
                 <YAxis
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: '#475569', fontSize: 10, fontWeight: 800 }}
+                  tick={{ fill: '#94A3B8', fontSize: 10, fontWeight: 900 }}
                 />
                 <Tooltip
-                  cursor={{ fill: '#ffffff02' }}
-                  contentStyle={{
-                    backgroundColor: '#020617',
-                    border: '1px solid rgba(255,255,255,0.05)',
-                    borderRadius: '16px',
-                    boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3)',
-                    padding: '12px'
+                  cursor={{ fill: 'rgba(37, 94, 145, 0.03)', radius: 8 }}
+                  content={({ active, payload, label }) => {
+                    if (active && payload && payload.length) {
+                      return (
+                        <div className="bg-white/90 backdrop-blur-xl border border-slate-200 p-5 rounded-2xl shadow-premium">
+                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 border-b border-slate-100 pb-2">{label}</p>
+                          <div className="flex items-center gap-3">
+                            <div className="w-3 h-3 rounded-full bg-brand-blue shadow-[0_0_10px_rgba(37,94,145,0.4)]"></div>
+                            <p className="text-sm font-black text-slate-900">{payload[0].value} <span className="text-slate-400 font-bold ml-1">Participations</span></p>
+                          </div>
+                        </div>
+                      );
+                    }
+                    return null;
                   }}
-                  itemStyle={{ fontWeight: 900, fontSize: '12px' }}
                 />
                 <Bar
                   dataKey="surveys"
-                  fill="url(#barGradient)"
-                  radius={[8, 8, 8, 8]}
-                  barSize={45}
+                  fill="url(#barGradientPremium)"
+                  radius={[12, 12, 12, 12]}
+                  barSize={32}
                 />
                 <defs>
-                  <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="barGradientPremium" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#21A0FF" />
                     <stop offset="100%" stopColor="#08306B" />
                   </linearGradient>
@@ -254,25 +264,28 @@ export default function Dashboard() {
         </div>
 
         {/* System Intelligence */}
-        <div className="glass-card rounded-[2.5rem] p-10 border border-slate-200 flex flex-col items-center justify-center text-center group">
-          <div className="w-24 h-24 bg-brand-blue/10 rounded-[2rem] flex items-center justify-center mb-8 border border-slate-100 group-hover:scale-110 transition-all duration-500 shadow-inner group-hover:shadow-[0_0_30px_rgba(37,94,145,0.1)]">
-            <Zap className="w-10 h-10 text-brand-blue" />
+        <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-premium flex flex-col items-center justify-center text-center group">
+          <div className="relative mb-8">
+            <div className="absolute inset-0 bg-brand-blue/10 rounded-[2.5rem] blur-2xl group-hover:blur-3xl transition-all duration-700"></div>
+            <div className="relative w-28 h-28 bg-white rounded-[2.5rem] flex items-center justify-center border border-slate-100 group-hover:scale-105 transition-all duration-500 shadow-inner-soft">
+              <Zap className="w-12 h-12 text-brand-blue" />
+            </div>
           </div>
-          <h3 className="text-2xl font-black font-display text-slate-900 mb-3">AI Calibration</h3>
-          <p className="text-slate-500 font-medium leading-relaxed mb-8">
-            Your verification engine is currently running at **{stats.accuracy}% accuracy** using the latest sentiment modeling.
+          <h3 className="text-2xl font-black font-display text-slate-900 mb-4 tracking-tight">Accuracy Tracking</h3>
+          <p className="text-sm font-medium text-slate-500 leading-relaxed mb-8 px-4">
+            Verification engine operating at <span className="text-slate-900 font-black">{stats.accuracy}% accuracy</span>.
           </p>
-          <div className="w-full h-1 bg-slate-100 rounded-full mb-10 overflow-hidden">
+          <div className="w-full h-2 bg-slate-50 rounded-full mb-10 overflow-hidden shadow-inner-soft">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${stats.accuracy}%` }}
-              transition={{ duration: 2, ease: "easeOut" }}
-              className="h-full bg-brand-blue shadow-[0_0_10px_rgba(37,94,145,0.2)]"
+              transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
+              className="h-full bg-gradient-to-r from-brand-blue to-brand-chartBlue shadow-[0_0_15px_rgba(37,94,145,0.2)]"
             />
           </div>
           <Link
             to="/templates"
-            className="w-full py-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-black uppercase tracking-widest text-slate-600 hover:bg-brand-blue hover:text-white transition-all shadow-sm active:scale-[0.98]"
+            className="w-full py-4 rounded-2xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:bg-brand-blue transition-all shadow-xl shadow-slate-900/10 active:scale-[0.98]"
           >
             Refine Protocols
           </Link>
@@ -280,11 +293,11 @@ export default function Dashboard() {
       </div>
 
       {/* Surveys Table */}
-      <div className="glass-card rounded-[2.5rem] border border-slate-200 overflow-hidden shadow-2xl">
-        <div className="p-10 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div className="bg-white rounded-[3rem] border border-slate-100 overflow-hidden shadow-premium relative">
+        <div className="p-12 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-8 bg-slate-50/30">
           <div>
             <h3 className="text-2xl font-black font-display text-slate-900">Active Research Registry</h3>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Audit-ready deployment logs</p>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">Audit-ready deployment logs</p>
           </div>
           <div className="flex items-center gap-4 bg-slate-50 p-1 rounded-2xl border border-slate-100 w-fit">
             <button className="px-5 py-2.5 rounded-xl bg-white shadow-lg border border-slate-200 text-[10px] font-black uppercase tracking-widest text-brand-blue">All Logs</button>
@@ -295,11 +308,11 @@ export default function Dashboard() {
           <table className="w-full border-collapse">
             <thead>
               <tr className="text-left text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] bg-slate-50/50">
-                <th className="px-10 py-6 border-b border-slate-100">Corporate Identity</th>
-                <th className="px-10 py-6 border-b border-slate-100">Initiated</th>
-                <th className="px-10 py-6 border-b border-slate-100">Protocol Tier</th>
-                <th className="px-10 py-6 border-b border-slate-100">Validation Pipeline</th>
-                <th className="px-10 py-6 border-b border-slate-100 text-right font-black">Commands</th>
+                <th className="px-10 py-6 border-b border-slate-100">Company Name</th>
+                <th className="px-10 py-6 border-b border-slate-100">Created At</th>
+                <th className="px-10 py-6 border-b border-slate-100">Blueprint</th>
+                <th className="px-10 py-6 border-b border-slate-100">Survey Status</th>
+                <th className="px-10 py-6 border-b border-slate-100 text-right font-black">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
@@ -411,32 +424,39 @@ export default function Dashboard() {
   );
 }
 
-function MetricCard({ title, value, icon: Icon, trend, color }: any) {
+function MetricCard({ title, value, icon: Icon, trend, color, delay = 0 }: any) {
   const colors: any = {
-    coral: 'text-brand-glow bg-brand-glow/10 border-brand-glow/20 shadow-[0_0_20px_rgba(222,124,126,0.1)]',
-    cyan: 'text-brand-cyan bg-brand-cyan/10 border-brand-cyan/20 shadow-[0_0_20px_rgba(138,202,236,0.1)]',
-    grey: 'text-brand-grey bg-brand-grey/10 border-brand-grey/20 shadow-[0_0_20px_rgba(146,146,146,0.1)]',
-    blue: 'text-brand-blue bg-brand-blue/10 border-brand-blue/20 shadow-[0_0_20px_rgba(37,94,145,0.1)]',
+    coral: 'text-brand-glow bg-brand-glow/5 border-brand-glow/10',
+    cyan: 'text-brand-cyan bg-brand-cyan/5 border-brand-cyan/10',
+    grey: 'text-brand-grey bg-brand-grey/5 border-brand-grey/10',
+    blue: 'text-brand-blue bg-brand-blue/5 border-brand-blue/10',
   };
 
   return (
-    <div className="glass-card rounded-[2.5rem] p-8 hover:scale-[1.03] transition-all duration-500 cursor-default group border border-white/5 hover:border-white/10 relative overflow-hidden">
-      <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-        <Icon className="w-24 h-24 rotate-12" />
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="bg-white rounded-[2.5rem] p-8 hover:translate-y-[-8px] transition-all duration-500 cursor-default group border border-slate-100 shadow-premium relative overflow-hidden"
+    >
+      <div className="absolute -right-4 -top-4 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-1000 group-hover:scale-125 transition-transform">
+        <Icon className="w-40 h-40 rotate-12" />
       </div>
-      <div className="flex justify-between items-start mb-6 relative z-10">
-        <div className={`p-4 rounded-3xl border ${colors[color] || colors.coral} group-hover:scale-110 transition-transform duration-500`}>
+      <div className="flex flex-col gap-6 relative z-10">
+        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border ${colors[color] || colors.coral} group-hover:scale-110 transition-transform duration-500 shadow-inner-soft`}>
           <Icon className="w-6 h-6" />
         </div>
-        <div className="text-right">
-          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{title}</p>
-          <p className="text-4xl font-display font-black mt-2 text-slate-900 group-hover:text-brand-blue transition-colors">{value}</p>
+        <div>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">{title}</p>
+          <div className="flex items-baseline gap-2">
+            <p className="text-4xl font-display font-black text-slate-900 tracking-tight">{value}</p>
+          </div>
+          <div className="mt-4 flex items-center gap-2 text-[9px] font-bold text-slate-500 bg-slate-50 w-fit px-3 py-2 rounded-xl border border-slate-100 shadow-inner-soft">
+            <TrendingUp className="w-3 h-3 text-emerald-500" />
+            <span className="uppercase tracking-widest">{trend}</span>
+          </div>
         </div>
       </div>
-      <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 bg-slate-50 w-fit px-3 py-1.5 rounded-xl border border-slate-100 relative z-10 group-hover:bg-slate-100 transition-colors">
-        <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
-        <span className="uppercase tracking-widest">{trend}</span>
-      </div>
-    </div>
+    </motion.div>
   );
 }

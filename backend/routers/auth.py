@@ -44,6 +44,7 @@ async def _create_user(user_in: UserCreate) -> User:
         "username": user_in.username,
         "email": user_in.email,
         "is_active": user_in.is_active,
+        "role": user_in.role,
         "hashed_password": hashed_pw,
         "created_at": UserInDB.model_fields["created_at"].default_factory(),
     }
@@ -75,6 +76,14 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]) -> Use
         raise credentials_exception
 
     return User(**user_in_db.model_dump())
+    
+async def get_current_active_admin(current_user: Annotated[User, Depends(get_current_user)]) -> User:
+    if current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="The user does not have enough privileges",
+        )
+    return current_user
 
 
 @router.post("/signup")
@@ -86,9 +95,9 @@ async def signup(user_in: UserCreate):
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": user.username, "role": user.role}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "role": user.role}
 
 
 @router.post("/token")
@@ -115,6 +124,7 @@ async def login_for_access_token(
             email=None,
             is_active=True,
             password=settings.ADMIN_PASSWORD,
+            role="admin"
         )
         await _create_user(seed_user)
         user_in_db = await _get_user(form_data.username)
@@ -133,9 +143,9 @@ async def login_for_access_token(
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user_in_db.username}, expires_delta=access_token_expires
+        data={"sub": user_in_db.username, "role": user_in_db.role}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "role": user_in_db.role}
 
 
 @router.get("/me", response_model=User)

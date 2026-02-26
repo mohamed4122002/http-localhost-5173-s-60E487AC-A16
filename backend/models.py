@@ -138,6 +138,7 @@ class UserBase(BaseModel):
     username: str
     email: Optional[EmailStr] = None
     is_active: bool = True
+    role: str = "user"  # admin, manager, user
 
     @field_validator("email", mode="before")
     @classmethod
@@ -158,6 +159,13 @@ class UserInDB(UserBase, MongoBaseModel):
 
 class User(UserBase, MongoBaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+class UserUpdate(BaseModel):
+    username: Optional[str] = None
+    email: Optional[EmailStr] = None
+    role: Optional[str] = None
+    is_active: Optional[bool] = None
 
 
 class TokenData(BaseModel):

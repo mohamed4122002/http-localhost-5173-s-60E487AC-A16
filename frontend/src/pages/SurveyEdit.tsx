@@ -31,7 +31,7 @@ export default function SurveyEdit() {
         if (surveyId) {
             surveys.get(surveyId)
                 .then(setSurvey)
-                .catch(() => toast.error('Failed to load survey configuration'))
+                .catch(() => toast.error('Failed to load survey settings'))
                 .finally(() => setLoading(false));
         }
     }, [surveyId]);
@@ -39,17 +39,17 @@ export default function SurveyEdit() {
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
         if (survey.status !== 'draft') {
-            toast.error('Immutable records cannot be modified after activation');
+            toast.error('Active surveys cannot be modified to ensure data consistency.');
             return;
         }
 
         setSaving(true);
         try {
             await surveys.update(surveyId!, survey);
-            toast.success('Configuration synchronized successfully');
+            toast.success('Settings saved successfully');
             navigate('/dashboard');
         } catch (err: any) {
-            const msg = err.response?.data?.detail || 'Failed to update configuration';
+            const msg = err.response?.data?.detail || 'Failed to update settings';
             toast.error(msg);
         } finally {
             setSaving(false);
@@ -67,8 +67,8 @@ export default function SurveyEdit() {
             <div className="p-8 rounded-[2.5rem] bg-brand-red/5 border border-brand-red/10 mb-8 shadow-xl text-brand-red">
                 <AlertCircle className="w-16 h-16" />
             </div>
-            <h2 className="text-3xl font-display font-black text-slate-900">Configuration <span className="text-brand-red">Not Found</span></h2>
-            <Link to="/dashboard" className="mt-8 px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all shadow-sm">Return to Control Center</Link>
+            <h2 className="text-3xl font-display font-black text-slate-900">Survey <span className="text-brand-red">Not Found</span></h2>
+            <Link to="/dashboard" className="mt-8 px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all shadow-sm">Return to Dashboard</Link>
         </div>
     );
 
@@ -76,7 +76,6 @@ export default function SurveyEdit() {
 
     return (
         <div className="space-y-10">
-            {/* Premium Header */}
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 text-left">
                 <div className="space-y-4">
                     <div className="flex items-center gap-2">
@@ -84,11 +83,11 @@ export default function SurveyEdit() {
                             <ArrowLeft className="w-4 h-4" />
                         </Link>
                         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
-                            Control <span className="text-brand-blue">Center</span>
+                            Survey <span className="text-brand-blue">Manager</span>
                         </div>
                     </div>
-                    <h1 className="text-4xl font-display font-black tracking-tight text-slate-900">
-                        Edit <span className="text-slate-400 font-light">Configuration</span>
+                    <h1 className="text-5xl font-display font-black tracking-tight text-slate-900">
+                        Edit <span className="text-slate-400 font-light italic">Settings</span>
                     </h1>
                     <p className="text-slate-500 font-medium">Fine-tune deployment rules for <span className="text-slate-900 font-black">{survey.company_name}</span></p>
                 </div>
@@ -98,14 +97,14 @@ export default function SurveyEdit() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="bg-brand-red/5 border border-brand-red/20 px-8 py-4 rounded-[2rem] flex items-center gap-4 text-brand-red shadow-xl"
+                            className="bg-brand-red/5 border border-brand-red/20 px-10 py-6 rounded-[2.5rem] flex items-center gap-6 text-brand-red shadow-premium"
                         >
-                            <div className="p-3 bg-white rounded-2xl shadow-sm">
-                                <Lock className="w-5 h-5" />
+                            <div className="p-4 bg-white rounded-2xl shadow-inner-soft">
+                                <Lock className="w-6 h-6" />
                             </div>
                             <div className="text-left">
-                                <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-1 text-brand-red/60">Status: {survey.status.toUpperCase()}</p>
-                                <p className="text-xs font-black uppercase tracking-tight">Read-only Protection Active</p>
+                                <p className="text-[10px] font-black uppercase tracking-[0.2em] leading-none mb-1 text-brand-red/60">Status: {survey.status.toUpperCase()}</p>
+                                <p className="text-sm font-black uppercase tracking-tight">Active (Locked)</p>
                             </div>
                         </motion.div>
                     )}
@@ -125,7 +124,7 @@ export default function SurveyEdit() {
                                 <div className="p-2.5 rounded-xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10">
                                     <Database className="w-5 h-5" />
                                 </div>
-                                <h3 className="text-xl font-display font-black text-slate-900">Routing <span className="text-brand-blue">& Schema</span></h3>
+                                <h3 className="text-xl font-display font-black text-slate-900">Survey <span className="text-brand-blue">Source</span></h3>
                             </div>
 
                             {!isReadOnly && (
@@ -142,7 +141,7 @@ export default function SurveyEdit() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-4">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Entity Name</label>
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Company Name</label>
                                 <input
                                     type="text"
                                     disabled={isReadOnly}
@@ -162,7 +161,7 @@ export default function SurveyEdit() {
                                 />
                             </div>
                             <div className="md:col-span-2 space-y-4">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Target Handoff URL</label>
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Destination URL</label>
                                 <div className="relative group">
                                     <Globe className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-brand-blue transition-colors pointer-events-none" />
                                     <input
@@ -188,7 +187,7 @@ export default function SurveyEdit() {
                             <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
                                 <ShieldCheck className="w-5 h-5" />
                             </div>
-                            <h3 className="text-xl font-display font-black text-slate-900">Gatekeeper <span className="text-emerald-600">Rules</span></h3>
+                            <h3 className="text-xl font-display font-black text-slate-900">Qualification <span className="text-emerald-600">Criteria</span></h3>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -246,12 +245,12 @@ export default function SurveyEdit() {
                     <div className="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-xl sticky top-24 text-left">
                         <div className="flex items-center gap-3 mb-8">
                             <Settings className="w-6 h-6 text-brand-blue" />
-                            <h3 className="text-xl font-display font-black text-slate-900">Persistence</h3>
+                            <h3 className="text-xl font-display font-black text-slate-900">Actions</h3>
                         </div>
 
                         <div className="space-y-8">
                             <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest">
-                                <span className="text-slate-400">Node Sync</span>
+                                <span className="text-slate-400">Status</span>
                                 <span className="text-emerald-600 flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> Ready</span>
                             </div>
 

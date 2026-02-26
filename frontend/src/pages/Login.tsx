@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../services/api';
 import { motion } from 'framer-motion';
@@ -18,6 +18,7 @@ export default function Login() {
     try {
       const response = await auth.login(username, password);
       localStorage.setItem('token', response.access_token);
+      localStorage.setItem('role', response.role || 'user');
       navigate('/dashboard');
     } catch (err: any) {
       if (err.response?.status === 401) {
@@ -55,7 +56,7 @@ export default function Login() {
             <img
               src="/brand/logo-icon.png"
               alt="Marketeers Logo"
-              className="w-12 h-12 object-contain"
+              className="w-16 h-16 object-contain"
             />
           </motion.div>
           <h2 className="text-4xl font-black font-display tracking-tight text-slate-900 mb-2">

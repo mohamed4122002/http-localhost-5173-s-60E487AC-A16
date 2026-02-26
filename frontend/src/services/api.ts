@@ -97,6 +97,12 @@ export const analytics = {
     (await api.get(`/analytics/orphans/${reason}`)).data,
 };
 
+export const users = {
+  list: async () => (await api.get('/users/')).data,
+  update: async (id: string, data: any) => (await api.put(`/users/${id}`, data)).data,
+  delete: async (id: string) => (await api.delete(`/users/${id}`)).data,
+};
+
 export const publicApi = {
   getSurvey: async (token: string) => (await api.get(`/s/${token}`)).data,
   submitLayer1: async (token: string, answers: any, phone: string) =>

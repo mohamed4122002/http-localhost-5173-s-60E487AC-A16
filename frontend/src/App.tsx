@@ -7,9 +7,10 @@ import Dashboard from './pages/Dashboard';
 import CreateSurvey from './pages/CreateSurvey';
 import Templates from './pages/Templates';
 import TokenManagement from './pages/TokenManagement';
-import AnalyticsDashboard from './pages/AnalyticsDashboard';
+import Analytics from './pages/Analytics';
 import SurveyEdit from './pages/SurveyEdit';
 import PublicSurvey from './pages/PublicSurvey';
+import UserManagement from './pages/UserManagement';
 
 import AdminNotifier from './components/notifications/AdminNotifier';
 import Layout from './components/Layout';
@@ -18,6 +19,14 @@ import { AnimatePresence } from 'framer-motion';
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('token');
   return token ? <Layout>{children}</Layout> : <Navigate to="/" />;
+}
+
+function AdminRoute({ children }: { children: React.ReactNode }) {
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+  if (!token) return <Navigate to="/" />;
+  if (role !== 'admin') return <Navigate to="/dashboard" />;
+  return <Layout>{children}</Layout>;
 }
 
 function App() {
@@ -47,6 +56,14 @@ function App() {
               }
             />
             <Route
+              path="/user-management"
+              element={
+                <AdminRoute>
+                  <UserManagement />
+                </AdminRoute>
+              }
+            />
+            <Route
               path="/create-survey"
               element={
                 <PrivateRoute>
@@ -66,7 +83,7 @@ function App() {
               path="/analytics/:surveyId"
               element={
                 <PrivateRoute>
-                  <AnalyticsDashboard />
+                  <Analytics />
                 </PrivateRoute>
               }
             />
