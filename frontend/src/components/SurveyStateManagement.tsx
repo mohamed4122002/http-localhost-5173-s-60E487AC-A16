@@ -96,7 +96,7 @@ export function SurveyStateToggle({ currentStatus, onTransition }: StateTogglePr
                                 <button
                                     onClick={executeTransition}
                                     disabled={loading}
-                                    className="px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 disabled:opacity-50"
+                                    className="px-4 py-2 bg-brand-accent hover:brightness-110 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2 disabled:opacity-50"
                                 >
                                     {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Confirm'}
                                 </button>

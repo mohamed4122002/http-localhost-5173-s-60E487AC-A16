@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { publicApi } from '../services/api';
 import {
   ShieldCheck,
-  Lock,
   ChevronRight,
   Phone,
   Sparkles,
@@ -127,28 +126,20 @@ export default function PublicSurvey() {
   };
 
   if (step === 'loading' || (loading && !survey)) return (
-    <div className="min-h-screen bg-brand-dark flex items-center justify-center p-6 text-white">
+    <div className="min-h-screen bg-brand-dark flex items-center justify-center p-6 text-slate-800">
       <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 rounded-full border-2 border-t-brand-accent border-white/10 animate-spin"></div>
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Synchronizing Session</p>
+        <div className="w-12 h-12 rounded-full border-2 border-t-brand-blue border-slate-200 animate-spin"></div>
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Synchronizing Session</p>
       </div>
     </div>
   );
 
   return (
-    <div className="relative min-h-screen bg-brand-dark flex items-center justify-center p-6 overflow-hidden text-slate-100 font-sans">
-      {/* Background Orbs */}
+    <div className="relative min-h-screen bg-brand-dark flex items-center justify-center p-6 overflow-hidden text-slate-900 font-sans">
+      {/* Soft Background Orbs */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-brand-accent/20 rounded-full blur-[120px]"
-        />
-        <motion.div
-          animate={{ x: [0, -80, 0], y: [0, 100, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[-10%] right-[-10%] w-[50rem] h-[50rem] bg-indigo-600/10 rounded-full blur-[150px]"
-        />
+        <div className="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-brand-blue/5 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50rem] h-[50rem] bg-brand-glow/5 rounded-full blur-[150px]"></div>
       </div>
 
       <AnimatePresence mode="wait">
@@ -158,16 +149,16 @@ export default function PublicSurvey() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="relative z-10 w-full max-w-lg glass-card rounded-[2.5rem] p-12 border border-white/10 text-center"
+            className="relative z-10 w-full max-w-lg bg-white rounded-[2.5rem] p-12 border border-slate-100 text-center shadow-2xl"
           >
-            <div className="w-20 h-20 bg-rose-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-rose-500/20">
+            <div className="w-20 h-20 bg-rose-50 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-rose-100">
               <ShieldAlert className="w-10 h-10 text-rose-500" />
             </div>
-            <h1 className="text-3xl font-display font-black mb-4">Verification <span className="text-rose-500 text-glow-rose">Restricted</span></h1>
-            <p className="text-slate-400 font-medium leading-relaxed mb-8">
+            <h1 className="text-3xl font-display font-black mb-4">Verification <span className="text-rose-500">Restricted</span></h1>
+            <p className="text-slate-500 font-medium leading-relaxed mb-8">
               {error || "Our automated system has flagged this session as invalid or non-qualifying for the current study."}
             </p>
-            <div className="p-4 bg-white/5 rounded-2xl border border-white/5 text-[10px] font-black uppercase tracking-widest text-slate-500">
+            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-[10px] font-black uppercase tracking-widest text-slate-400">
               Audit ID: {token?.slice(0, 8)}
             </div>
           </motion.div>
@@ -176,16 +167,16 @@ export default function PublicSurvey() {
             key="submitted"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="relative z-10 w-full max-w-lg glass-card rounded-[2.5rem] p-12 border border-white/10 text-center"
+            className="relative z-10 w-full max-w-lg bg-white rounded-[2.5rem] p-12 border border-slate-100 text-center shadow-2xl"
           >
-            <div className="w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-emerald-500/20">
+            <div className="w-20 h-20 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-emerald-100">
               <ShieldCheck className="w-10 h-10 text-emerald-500" />
             </div>
-            <h1 className="text-3xl font-display font-black mb-4">Participation <span className="text-brand-glow text-glow-accent">Complete</span></h1>
-            <p className="text-slate-400 font-medium leading-relaxed mb-8">
+            <h1 className="text-3xl font-display font-black mb-4">Participation <span className="text-brand-blue">Complete</span></h1>
+            <p className="text-slate-500 font-medium leading-relaxed mb-8">
               Thank you for contributing to this research study. Your responses have been securely synchronized.
             </p>
-            <div className="p-4 bg-white/5 rounded-2xl border border-white/5 text-[10px] font-black uppercase tracking-widest text-slate-500">
+            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-[10px] font-black uppercase tracking-widest text-slate-400">
               Confirmation ID: {token?.slice(-8).toUpperCase()}
             </div>
           </motion.div>
@@ -194,22 +185,22 @@ export default function PublicSurvey() {
             key="passed"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="relative z-10 w-full max-w-lg glass-card rounded-[2.5rem] p-12 border border-white/10 text-center"
+            className="relative z-10 w-full max-w-lg bg-white rounded-[2.5rem] p-12 border border-slate-100 text-center shadow-2xl"
           >
-            <div className="w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-emerald-500/20 animate-pulse">
+            <div className="w-20 h-20 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-emerald-100 animate-pulse">
               <ShieldCheck className="w-10 h-10 text-emerald-500" />
             </div>
-            <h1 className="text-3xl font-display font-black mb-4">Credentials <span className="text-brand-glow text-glow-accent">Verified</span></h1>
-            <p className="text-slate-400 font-medium leading-relaxed mb-8">
+            <h1 className="text-3xl font-display font-black mb-4">Credentials <span className="text-brand-blue">Verified</span></h1>
+            <p className="text-slate-500 font-medium leading-relaxed mb-8">
               Optimization successful. Transitioning to the research instrument...
             </p>
             <div className="flex flex-col items-center gap-2">
-              <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden">
+              <div className="w-48 h-1 bg-slate-100 rounded-full overflow-hidden">
                 <motion.div
                   initial={{ x: "-100%" }}
                   animate={{ x: "100%" }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                  className="w-full h-full bg-brand-accent shadow-[0_0_10px_rgba(139,92,246,0.5)]"
+                  className="w-full h-full bg-brand-blue shadow-[0_0_10px_rgba(37,94,145,0.2)]"
                 />
               </div>
             </div>
@@ -219,17 +210,17 @@ export default function PublicSurvey() {
             key="layer2"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="relative z-10 w-full max-w-3xl glass-card rounded-[3rem] p-12 border border-white/10"
+            className="relative z-10 w-full max-w-3xl bg-white rounded-[3rem] p-12 border border-slate-100 shadow-2xl"
           >
             <div className="flex items-center gap-3 mb-8">
-              <Sparkles className="w-5 h-5 text-brand-accent" />
-              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-                Evaluation <span className="text-brand-glow text-glow-accent">Phase</span>
+              <Sparkles className="w-5 h-5 text-brand-blue" />
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                Evaluation <span className="text-brand-blue">Phase</span>
               </div>
             </div>
 
             <h1 className="text-3xl font-display font-black tracking-tight mb-8">
-              Study <span className="text-slate-500 font-light">Instrument</span>
+              Study <span className="text-slate-400 font-light">Instrument</span>
             </h1>
 
             <form onSubmit={handleL2Submit} className="space-y-12">
@@ -242,7 +233,7 @@ export default function PublicSurvey() {
                     <div className="space-y-8">
                       {section.questions?.map((q: any) => (
                         <div key={q.id} className="space-y-4">
-                          <p className="text-sm font-bold text-slate-300">{q.text || q.label || 'Survey Question'}</p>
+                          <p className="text-sm font-bold text-slate-800">{q.text || q.label || 'Survey Question'}</p>
                           {q.type === 'scale' ? (
                             <div className="flex items-center gap-2">
                               {[...Array(q.options?.length || q.max || 5)].map((_, i) => (
@@ -250,7 +241,7 @@ export default function PublicSurvey() {
                                   key={i}
                                   type="button"
                                   onClick={() => setL2Answers({ ...l2Answers, [q.id]: i + 1 })}
-                                  className={`flex-1 h-14 rounded-xl border font-black transition-all ${l2Answers[q.id] === i + 1 ? 'bg-brand-accent text-white border-brand-accent shadow-lg shadow-brand-accent/20' : 'bg-slate-950/50 border-white/5 text-slate-500 hover:border-white/20'}`}
+                                  className={`flex-1 h-14 rounded-xl border font-black transition-all ${l2Answers[q.id] === i + 1 ? 'bg-brand-blue text-white border-brand-blue shadow-lg shadow-brand-blue/20' : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-300'}`}
                                 >
                                   {q.options?.[i] || i + 1}
                                 </button>
@@ -259,7 +250,7 @@ export default function PublicSurvey() {
                           ) : q.type === 'text' ? (
                             <input
                               type="text"
-                              className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-accent/50 transition-all font-bold placeholder:text-slate-700"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-slate-900 focus:outline-none focus:border-brand-blue/50 transition-all font-bold placeholder:text-slate-300"
                               placeholder="Type your response..."
                               value={l2Answers[q.id] || ''}
                               onChange={(e) => setL2Answers({ ...l2Answers, [q.id]: e.target.value })}
@@ -271,7 +262,7 @@ export default function PublicSurvey() {
                                   key={opt}
                                   type="button"
                                   onClick={() => setL2Answers({ ...l2Answers, [q.id]: opt })}
-                                  className={`w-full p-4 rounded-xl border text-left font-bold transition-all ${l2Answers[q.id] === opt ? 'bg-brand-accent/20 border-brand-accent text-white' : 'bg-slate-950/50 border-white/5 text-slate-500'}`}
+                                  className={`w-full p-4 rounded-xl border text-left font-bold transition-all ${l2Answers[q.id] === opt ? 'bg-brand-blue/10 border-brand-blue text-brand-blue' : 'bg-slate-50 border-slate-100 text-slate-500'} `}
                                 >
                                   {opt}
                                 </button>
@@ -305,30 +296,28 @@ export default function PublicSurvey() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="relative z-10 w-full max-w-2xl glass-card rounded-[3rem] p-12 border border-white/10"
+            className="relative z-10 w-full max-w-2xl bg-white rounded-[3rem] p-12 border border-slate-100 shadow-2xl"
           >
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 rounded-xl bg-brand-accent/20 text-brand-accent border border-brand-accent/20">
-                <Lock className="w-5 h-5" />
-              </div>
-              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-                Secure <span className="text-brand-glow text-glow-accent">Infrastructure</span>
+            <div className="flex flex-col items-center mb-10">
+              <img src="/brand/logo-icon.png" alt="Logo" className="w-16 h-16 mb-4 object-contain" />
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                Secure <span className="text-brand-blue">Infrastructure</span>
               </div>
             </div>
 
-            <h1 className="text-4xl font-display font-black tracking-tight mb-2">
-              {survey?.company_name} <span className="text-slate-500 font-light">Participation</span>
+            <h1 className="text-4xl font-display font-black tracking-tight mb-2 text-center text-slate-900">
+              {survey?.company_name} <br /> <span className="text-slate-400 font-light">Participation Protocol</span>
             </h1>
-            <div className="flex items-center gap-2 mb-8">
-              <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-brand-accent/10 text-brand-accent border border-brand-accent/20">
+            <div className="flex items-center gap-2 mb-8 justify-center">
+              <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-brand-blue/10 text-brand-blue border border-brand-blue/10">
                 Blueprint: {survey?.template_name || 'Standard'}
               </span>
-              <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-emerald-50 text-emerald-600 border border-emerald-100">
                 ID: {token?.slice(-6).toUpperCase()}
               </span>
             </div>
 
-            <p className="text-slate-400 font-medium leading-relaxed mb-10 pb-8 border-b border-white/5">
+            <p className="text-slate-500 font-medium leading-relaxed mb-10 pb-8 border-b border-slate-50 text-center">
               Please complete the following qualification probe. Upon synchronization, you will be redirected to the research instrument.
             </p>
 
@@ -336,13 +325,13 @@ export default function PublicSurvey() {
               <div className="space-y-8 max-h-[40vh] overflow-y-auto px-2 custom-scrollbar">
                 {/* Always include Phone for handoff matching */}
                 <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Contact Protocol (International Mobile)</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Contact Protocol (International Mobile)</label>
                   <div className="flex gap-2">
                     <div className="relative">
                       <button
                         type="button"
                         onClick={() => setShowCountrySelector(!showCountrySelector)}
-                        className="h-full bg-slate-950/50 border border-white/5 rounded-2xl px-4 text-white flex items-center gap-2 hover:border-brand-accent/50 transition-all font-bold"
+                        className="h-full bg-slate-50 border border-slate-200 rounded-2xl px-4 text-slate-900 flex items-center gap-2 hover:border-brand-blue/50 transition-all font-bold"
                       >
                         <span>{countries.find(c => c.code === countryCode)?.flag}</span>
                         <span className="text-sm">{countryCode}</span>
@@ -355,7 +344,7 @@ export default function PublicSurvey() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
-                            className="absolute top-full left-0 mt-2 w-48 bg-slate-900 border border-white/10 rounded-2xl p-2 shadow-2xl z-50 max-h-60 overflow-y-auto custom-scrollbar"
+                            className="absolute top-full left-0 mt-2 w-48 bg-white border border-slate-200 rounded-2xl p-2 shadow-2xl z-50 max-h-60 overflow-y-auto custom-scrollbar"
                           >
                             {countries.map(c => (
                               <button
@@ -365,12 +354,12 @@ export default function PublicSurvey() {
                                   setCountryCode(c.code);
                                   setShowCountrySelector(false);
                                 }}
-                                className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors text-left"
+                                className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors text-left"
                               >
                                 <span className="text-xl">{c.flag}</span>
                                 <div className="flex flex-col">
-                                  <span className="text-xs font-black text-white">{c.code}</span>
-                                  <span className="text-[10px] text-slate-500 uppercase font-bold">{c.name}</span>
+                                  <span className="text-xs font-black text-slate-900">{c.code}</span>
+                                  <span className="text-[10px] text-slate-400 uppercase font-bold">{c.name}</span>
                                 </div>
                               </button>
                             ))}
@@ -380,12 +369,12 @@ export default function PublicSurvey() {
                     </div>
 
                     <div className="relative flex-1 group">
-                      <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-accent transition-colors" />
+                      <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-brand-blue transition-colors" />
                       <input
                         type="tel"
                         required
                         placeholder="123 456 7890"
-                        className="w-full bg-slate-950/50 border border-white/5 rounded-2xl pl-12 pr-6 py-4 text-white focus:outline-none focus:border-brand-accent/50 focus:ring-4 focus:ring-brand-accent/10 transition-all font-bold placeholder:text-slate-700"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-6 py-4 text-slate-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/5 transition-all font-bold placeholder:text-slate-300"
                         value={phone}
                         onChange={e => setPhone(e.target.value)}
                       />
@@ -407,7 +396,7 @@ export default function PublicSurvey() {
                                 key={opt}
                                 type="button"
                                 onClick={() => setAnswers({ ...answers, [qId]: opt })}
-                                className={`w-full p-4 rounded-2xl border text-left font-bold transition-all ${answers[qId] === opt ? 'bg-brand-accent/20 border-brand-accent text-white' : 'bg-slate-950/50 border-white/5 text-slate-500 hover:border-white/10'}`}
+                                className={`w-full p-4 rounded-2xl border text-left font-bold transition-all ${answers[qId] === opt ? 'bg-brand-blue/10 border-brand-blue text-brand-blue' : 'bg-slate-50 border-slate-100 text-slate-500 hover:border-slate-300'}`}
                               >
                                 {opt}
                               </button>
@@ -420,7 +409,7 @@ export default function PublicSurvey() {
                                 key={i}
                                 type="button"
                                 onClick={() => setAnswers({ ...answers, [qId]: i + 1 })}
-                                className={`flex-1 h-12 rounded-xl border font-black transition-all ${answers[qId] === i + 1 ? 'bg-brand-accent text-white border-brand-accent' : 'bg-slate-950/50 border-white/5 text-slate-500'}`}
+                                className={`flex-1 h-12 rounded-xl border font-black transition-all ${answers[qId] === i + 1 ? 'bg-brand-blue text-white border-brand-blue' : 'bg-slate-50 border-slate-100 text-slate-500'}`}
                               >
                                 {i + 1}
                               </button>
@@ -432,7 +421,7 @@ export default function PublicSurvey() {
                               type={q.type === 'email' ? 'email' : (q.type === 'age' ? 'number' : 'text')}
                               required={q.required}
                               placeholder={q.label}
-                              className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-accent/50 transition-all font-bold"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-slate-900 focus:outline-none focus:border-brand-blue/50 transition-all font-bold placeholder:text-slate-300"
                               value={answers[qId] || ''}
                               onChange={e => {
                                 const val = e.target.value;
@@ -455,7 +444,7 @@ export default function PublicSurvey() {
                                   initial={{ opacity: 0, scale: 0.95 }}
                                   animate={{ opacity: 1, scale: 1 }}
                                   exit={{ opacity: 0, scale: 0.95 }}
-                                  className="absolute top-full left-0 right-0 mt-2 bg-slate-900 border border-white/10 rounded-2xl p-2 shadow-2xl z-50 overflow-hidden"
+                                  className="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl p-2 shadow-2xl z-50 overflow-hidden"
                                 >
                                   {areaSuggestions.map(suggestion => (
                                     <button
@@ -465,7 +454,7 @@ export default function PublicSurvey() {
                                         setAnswers({ ...answers, [qId]: suggestion });
                                         setAreaSuggestions([]);
                                       }}
-                                      className="w-full p-4 rounded-xl hover:bg-brand-accent/10 hover:text-brand-accent transition-all text-left font-bold text-sm border border-transparent hover:border-brand-accent/20"
+                                      className="w-full p-4 rounded-xl hover:bg-slate-50 hover:text-brand-blue transition-all text-left font-bold text-sm border border-transparent hover:border-slate-100"
                                     >
                                       {suggestion}
                                     </button>
@@ -482,7 +471,7 @@ export default function PublicSurvey() {
                                     key={suggestion}
                                     type="button"
                                     onClick={() => setAnswers({ ...answers, [qId]: suggestion })}
-                                    className="text-[10px] font-bold px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-slate-400 hover:bg-brand-accent/10 hover:border-brand-accent/20 hover:text-brand-accent transition-all"
+                                    className="text-[10px] font-bold px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-slate-500 hover:bg-brand-blue/5 hover:border-brand-blue/20 hover:text-brand-blue transition-all"
                                   >
                                     {suggestion}
                                   </button>
@@ -511,12 +500,12 @@ export default function PublicSurvey() {
               </button>
             </form>
 
-            <div className="mt-10 pt-8 border-t border-white/5 flex items-center justify-between">
-              <div className="flex items-center gap-2 text-slate-500">
+            <div className="mt-10 pt-8 border-t border-slate-50 flex items-center justify-between">
+              <div className="flex items-center gap-2 text-slate-400">
                 <ShieldCheck className="w-4 h-4 text-emerald-500" />
                 <span className="text-[10px] font-black uppercase tracking-tighter">Verified Protocol</span>
               </div>
-              <div className="text-[10px] font-black uppercase text-slate-700 tracking-tighter">
+              <div className="text-[10px] font-black uppercase text-slate-300 tracking-tighter">
                 Audit Logged Access
               </div>
             </div>

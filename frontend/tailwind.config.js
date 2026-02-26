@@ -8,17 +8,49 @@ export default {
     extend: {
       colors: {
         brand: {
-          dark: '#020617', // slate-950
-          surface: '#0f172a', // slate-900
-          border: '#1e293b', // slate-800
-          accent: '#8b5cf6', // violet-500
-          glow: '#c084fc', // purple-400
-          cyan: '#22d3ee', // cyan-400
+          // ── Dark backgrounds (UI base — unchanged) ─────────────────────
+          dark: '#F8FAFC',     // Light App Background (Slate 50)
+          surface: '#FFFFFF',  // Pure White Card Surface
+          border: '#E2E8F0',   // Light Borders (Slate 200)
+
+          // ── Primary palette ─────────────────────────────────────────────
+          blue: '#255E91',  // Lapis Blue  — Primary branding
+          red: '#CD393B',  // Brand Red   — Alerts/CTAs (from logo)
+          accent: '#CD393B',  // alias of red
+
+          // ── Secondary blues (charts & interactive) ──────────────────────
+          chartBlue: '#21A0FF',  // primary.light / primary.charts
+          chartBlueMid: '#53B5FF',  // primary.charts light variant
+          cyan: '#8ACAEC',  // Baby Blue    — Secondary accent
+          blueMedium: '#0070C0',  // interactive links
+          blueHover: '#005EA4',  // hover / active states
+          blueLight: '#B9DFF4',  // very light blue fills
+          bluePale: '#DCEFF9',  // secondary.light — bg / cards
+          blueFaintest: '#eefaff',  // lightest blue tint
+
+          // ── Tertiary neutrals + pinks ───────────────────────────────────
+          pink: '#E79D9E',  // subtle accents / dividers
+          pinkLight: '#EFBEBF',  // light pink fills
+          pinkPale: '#F7DEDF',  // very light pink backgrounds
+          grey: '#929292',  // Battleship Grey — Muted text / Borders
+          greyMid: '#D3D3D3',  // light grey fills
+          greyLight: '#E4E4E4',  // lightest grey backgrounds
+          titleGrey: '#847e70',  // primary.dark — titles only
+
+          // ── Accent & highlight ──────────────────────────────────────────
+          yellow: '#FBC210',  // accent.light — highlight / key info
+          glow: '#DE7C7E',  // Light Coral  — Supporting accent
+
+          // ── Indicators ──────────────────────────────────────────────────
+          safe: '#2e7d32',  // indicator.safe   — unchanged
+          threat: '#CD393B',  // indicator.threat — Brand Red
+          warning: '#f58327',  // indicator.warning — unchanged
         }
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-        display: ['Outfit', 'ui-sans-serif', 'system-ui'],
+        // Full brand font stack: Pangram → Segoe UI Black → Open Sans → system
+        sans: ['"Pangram Sans"', '"Segoe UI Black"', '"Open Sans"', 'ui-sans-serif', 'system-ui'],
+        display: ['"Pangram Sans"', '"Segoe UI Black"', '"Open Sans"', 'ui-sans-serif', 'system-ui'],
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -36,8 +68,8 @@ export default {
         }
       },
       boxShadow: {
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-        'accent-glow': '0 0 20px rgba(139, 92, 246, 0.3)',
+        'glass': '0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 0 1px 0 rgba(0, 0, 0, 0.1)',
+        'accent-glow': '0 10px 25px -5px rgba(37, 94, 145, 0.15)',
       }
     },
   },

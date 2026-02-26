@@ -58,17 +58,17 @@ export default function SurveyEdit() {
 
     if (loading) return (
         <div className="h-[60vh] flex items-center justify-center">
-            <div className="w-12 h-12 rounded-full border-2 border-t-brand-accent border-white/10 animate-spin"></div>
+            <div className="w-12 h-12 rounded-full border-4 border-slate-100 border-t-brand-blue animate-spin shadow-inner"></div>
         </div>
     );
 
     if (!survey) return (
         <div className="h-[60vh] flex flex-col items-center justify-center text-center">
-            <div className="p-6 rounded-full bg-rose-500/10 border border-rose-500/20 mb-6">
-                <AlertCircle className="w-12 h-12 text-rose-500" />
+            <div className="p-8 rounded-[2.5rem] bg-brand-red/5 border border-brand-red/10 mb-8 shadow-xl text-brand-red">
+                <AlertCircle className="w-16 h-16" />
             </div>
-            <h2 className="text-2xl font-display font-black">Configuration <span className="text-rose-500">Not Found</span></h2>
-            <Link to="/dashboard" className="mt-6 text-brand-glow font-black uppercase tracking-widest text-xs hover:underline">Return to Control Center</Link>
+            <h2 className="text-3xl font-display font-black text-slate-900">Configuration <span className="text-brand-red">Not Found</span></h2>
+            <Link to="/dashboard" className="mt-8 px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all shadow-sm">Return to Control Center</Link>
         </div>
     );
 
@@ -77,20 +77,20 @@ export default function SurveyEdit() {
     return (
         <div className="space-y-10">
             {/* Premium Header */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 text-left">
                 <div className="space-y-4">
                     <div className="flex items-center gap-2">
-                        <Link to="/dashboard" className="p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                        <Link to="/dashboard" className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors text-slate-500">
                             <ArrowLeft className="w-4 h-4" />
                         </Link>
-                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
-                            Control <span className="text-brand-glow">Center</span>
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+                            Control <span className="text-brand-blue">Center</span>
                         </div>
                     </div>
-                    <h1 className="text-4xl font-display font-black tracking-tight">
-                        Edit <span className="text-slate-500 font-light">Configuration</span>
+                    <h1 className="text-4xl font-display font-black tracking-tight text-slate-900">
+                        Edit <span className="text-slate-400 font-light">Configuration</span>
                     </h1>
-                    <p className="text-slate-400 font-medium">Fine-tune deployment rules for <span className="text-white">{survey.company_name}</span></p>
+                    <p className="text-slate-500 font-medium">Fine-tune deployment rules for <span className="text-slate-900 font-black">{survey.company_name}</span></p>
                 </div>
 
                 <AnimatePresence>
@@ -98,12 +98,14 @@ export default function SurveyEdit() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="bg-brand-accent/5 border border-brand-accent/20 px-6 py-3 rounded-2xl flex items-center gap-3 text-brand-glow"
+                            className="bg-brand-red/5 border border-brand-red/20 px-8 py-4 rounded-[2rem] flex items-center gap-4 text-brand-red shadow-xl"
                         >
-                            <Lock className="w-4 h-4" />
+                            <div className="p-3 bg-white rounded-2xl shadow-sm">
+                                <Lock className="w-5 h-5" />
+                            </div>
                             <div className="text-left">
-                                <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-1 text-slate-500">Status: {survey.status.toUpperCase()}</p>
-                                <p className="text-xs font-bold">Read-only Protection Active</p>
+                                <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-1 text-brand-red/60">Status: {survey.status.toUpperCase()}</p>
+                                <p className="text-xs font-black uppercase tracking-tight">Read-only Protection Active</p>
                             </div>
                         </motion.div>
                     )}
@@ -116,21 +118,21 @@ export default function SurveyEdit() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="glass-card rounded-[2.5rem] p-10 border border-white/5"
+                        className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-xl text-left"
                     >
                         <div className="flex items-center justify-between mb-8">
                             <div className="flex items-center gap-3">
-                                <div className="p-2.5 rounded-xl bg-brand-accent/10 text-brand-accent">
+                                <div className="p-2.5 rounded-xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10">
                                     <Database className="w-5 h-5" />
                                 </div>
-                                <h3 className="text-xl font-display font-black">Routing <span className="text-brand-glow">& Schema</span></h3>
+                                <h3 className="text-xl font-display font-black text-slate-900">Routing <span className="text-brand-blue">& Schema</span></h3>
                             </div>
 
                             {!isReadOnly && (
                                 <button
                                     type="button"
                                     onClick={() => setIsAssistantOpen(true)}
-                                    className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-brand-accent/10 border border-white/5 rounded-xl text-[10px] font-black uppercase tracking-widest text-brand-glow transition-all"
+                                    className="flex items-center gap-2 px-6 py-2.5 bg-slate-50 hover:bg-white border border-slate-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-brand-blue transition-all shadow-sm hover:shadow-md hover:border-brand-blue/20"
                                 >
                                     <Wand2 className="w-3 h-3" />
                                     Launch Assistant
@@ -139,34 +141,34 @@ export default function SurveyEdit() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Entity Name</label>
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Entity Name</label>
                                 <input
                                     type="text"
                                     disabled={isReadOnly}
-                                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-accent/50 focus:ring-4 focus:ring-brand-accent/10 transition-all font-bold disabled:opacity-30"
+                                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-slate-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/5 transition-all font-bold disabled:opacity-30 shadow-inner"
                                     value={survey.company_name}
                                     onChange={e => setSurvey({ ...survey, company_name: e.target.value })}
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Google Form ID</label>
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Google Form ID</label>
                                 <input
                                     type="text"
                                     disabled={isReadOnly}
-                                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-accent/50 transition-all font-bold disabled:opacity-30"
+                                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-slate-900 focus:outline-none focus:border-brand-blue/50 transition-all font-bold disabled:opacity-30 shadow-inner"
                                     value={survey.google_form_id}
                                     onChange={e => setSurvey({ ...survey, google_form_id: e.target.value })}
                                 />
                             </div>
-                            <div className="md:col-span-2 space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Target Handoff URL</label>
+                            <div className="md:col-span-2 space-y-4">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Target Handoff URL</label>
                                 <div className="relative group">
-                                    <Globe className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-glow transition-colors pointer-events-none" />
+                                    <Globe className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-brand-blue transition-colors pointer-events-none" />
                                     <input
                                         type="text"
                                         disabled={isReadOnly}
-                                        className="w-full bg-slate-950/50 border border-white/5 rounded-2xl pl-12 pr-6 py-4 text-white focus:outline-none focus:border-brand-glow/50 transition-all font-mono text-[10px] font-bold disabled:opacity-30"
+                                        className="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-12 pr-6 py-4 text-slate-900 focus:outline-none focus:border-brand-blue/50 transition-all font-mono text-[10px] font-bold disabled:opacity-30 shadow-inner"
                                         value={survey.google_form_url}
                                         onChange={e => setSurvey({ ...survey, google_form_url: e.target.value })}
                                     />
@@ -180,22 +182,22 @@ export default function SurveyEdit() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="glass-card rounded-[2.5rem] p-10 border border-white/5"
+                        className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-xl text-left"
                     >
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="p-2.5 rounded-xl bg-emerald-400/10 text-emerald-400">
+                            <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
                                 <ShieldCheck className="w-5 h-5" />
                             </div>
-                            <h3 className="text-xl font-display font-black">Gatekeeper <span className="text-emerald-400">Rules</span></h3>
+                            <h3 className="text-xl font-display font-black text-slate-900">Gatekeeper <span className="text-emerald-600">Rules</span></h3>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Lower Age Limit</label>
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Lower Age Limit</label>
                                 <input
                                     type="number"
                                     disabled={isReadOnly}
-                                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-emerald-400/50 transition-all font-bold disabled:opacity-30"
+                                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-slate-900 focus:outline-none focus:border-emerald-500/50 transition-all font-bold disabled:opacity-30 shadow-inner"
                                     value={survey.layer1_rules.age_min || ''}
                                     onChange={e => setSurvey({
                                         ...survey,
@@ -203,12 +205,12 @@ export default function SurveyEdit() {
                                     })}
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Upper Age Limit</label>
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Upper Age Limit</label>
                                 <input
                                     type="number"
                                     disabled={isReadOnly}
-                                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-emerald-400/50 transition-all font-bold disabled:opacity-30"
+                                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-slate-900 focus:outline-none focus:border-emerald-500/50 transition-all font-bold disabled:opacity-30 shadow-inner"
                                     value={survey.layer1_rules.age_max || ''}
                                     onChange={e => setSurvey({
                                         ...survey,
@@ -216,13 +218,13 @@ export default function SurveyEdit() {
                                     })}
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Gender Targeting</label>
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Gender Targeting</label>
                                 <div className="relative group">
-                                    <Users className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-emerald-400 transition-colors pointer-events-none" />
+                                    <Users className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-emerald-600 transition-colors pointer-events-none" />
                                     <select
                                         disabled={isReadOnly}
-                                        className="w-full bg-slate-950/50 border border-white/5 rounded-2xl pl-12 pr-10 py-4 text-white focus:outline-none focus:border-emerald-400/50 transition-all font-bold appearance-none cursor-pointer disabled:opacity-30"
+                                        className="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-12 pr-10 py-4 text-slate-900 focus:outline-none focus:border-emerald-500/50 transition-all font-bold appearance-none cursor-pointer disabled:opacity-30 shadow-inner"
                                         value={survey.layer1_rules.gender || ''}
                                         onChange={e => setSurvey({
                                             ...survey,
@@ -233,7 +235,7 @@ export default function SurveyEdit() {
                                         <option value="male">Target: Male</option>
                                         <option value="female">Target: Female</option>
                                     </select>
-                                    <ChevronRight className="absolute right-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-700 pointer-events-none rotate-90" />
+                                    <ChevronRight className="absolute right-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 pointer-events-none rotate-90" />
                                 </div>
                             </div>
                         </div>
@@ -241,41 +243,41 @@ export default function SurveyEdit() {
                 </div>
 
                 <div className="space-y-6">
-                    <div className="glass-card rounded-[2rem] p-8 border border-white/5 sticky top-24">
-                        <div className="flex items-center gap-3 mb-6">
-                            <Settings className="w-5 h-5 text-slate-500" />
-                            <h3 className="text-lg font-display font-black">Persistence</h3>
+                    <div className="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-xl sticky top-24 text-left">
+                        <div className="flex items-center gap-3 mb-8">
+                            <Settings className="w-6 h-6 text-brand-blue" />
+                            <h3 className="text-xl font-display font-black text-slate-900">Persistence</h3>
                         </div>
 
-                        <div className="space-y-6">
+                        <div className="space-y-8">
                             <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest">
-                                <span className="text-slate-500">Node Sync</span>
-                                <span className="text-emerald-400 flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> Ready</span>
+                                <span className="text-slate-400">Node Sync</span>
+                                <span className="text-emerald-600 flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> Ready</span>
                             </div>
 
-                            <div className="w-full h-px bg-white/5"></div>
+                            <div className="w-full h-px bg-slate-100"></div>
 
                             {!isReadOnly ? (
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="btn-premium w-full py-4 text-white flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/20 font-black tracking-widest uppercase text-xs"
+                                    className="w-full py-5 bg-brand-blue text-white rounded-2xl flex items-center justify-center gap-3 group shadow-xl shadow-brand-blue/10 hover:shadow-brand-blue/20 transition-all font-black tracking-widest uppercase text-xs"
                                 >
                                     {saving ? <Clock className="w-5 h-5 animate-spin" /> : (
                                         <>
                                             Save Changes
-                                            <Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                            <Save className="w-5 h-5 group-hover:scale-110 transition-all" />
                                         </>
                                     )}
                                 </button>
                             ) : (
-                                <div className="p-4 bg-white/2 border border-white/5 rounded-2xl text-center">
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Protection State</p>
-                                    <p className="text-xs font-bold text-slate-300">Active surveys cannot be reconfigured to maintain integrity.</p>
+                                <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl text-center">
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Protection State</p>
+                                    <p className="text-xs font-bold text-slate-500 leading-relaxed">Active surveys cannot be reconfigured to maintain integrity.</p>
                                 </div>
                             )}
 
-                            <Link to="/dashboard" className="w-full py-3 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all rounded-xl text-center text-xs font-black uppercase tracking-widest">
+                            <Link to="/dashboard" className="w-full py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all rounded-xl text-center text-xs font-black uppercase tracking-widest block shadow-sm">
                                 Return to Dashboard
                             </Link>
                         </div>

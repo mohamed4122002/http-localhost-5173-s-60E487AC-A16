@@ -46,15 +46,15 @@ export default function Analytics() {
 
     if (loading) return (
         <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-accent"></div>
         </div>
     );
 
     const funnelChartData = [
-        { name: 'Unused', value: funnelData?.unused || 0, fill: '#64748b' },
-        { name: 'Passed', value: funnelData?.passed || 0, fill: '#10b981' },
-        { name: 'Failed', value: funnelData?.failed || 0, fill: '#f43f5e' },
-        { name: 'Submitted', value: funnelData?.submitted || 0, fill: '#0ea5e9' },
+        { name: 'Unused', value: funnelData?.unused || 0, fill: '#BEBEBE' },      // brand.grey
+        { name: 'Passed', value: funnelData?.passed || 0, fill: '#8ACAEC' },      // brand.cyan
+        { name: 'Failed', value: funnelData?.failed || 0, fill: '#CD393B' },      // brand.red
+        { name: 'Submitted', value: funnelData?.submitted || 0, fill: '#08306B' }, // brand.blue
     ];
 
     const orphanChartData = orphanData?.categories.map((c: any) => ({
@@ -62,35 +62,35 @@ export default function Analytics() {
         value: c.count
     })) || [];
 
-    const COLORS = ['#6366f1', '#10b981', '#f43f5e', '#f59e0b', '#0ea5e9'];
+    const COLORS = ['#08306B', '#CD393B', '#BEBEBE', '#8ACAEC'];
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-50 p-6 lg:p-8">
+        <div className="min-h-screen bg-brand-dark text-slate-900 p-6 lg:p-8 font-sans">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
-                <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 text-left">
                     <div>
-                        <div className="flex items-center gap-2 text-purple-400 text-sm font-medium mb-1">
-                            <Link to="/dashboard" className="hover:text-purple-300">Dashboard</Link>
-                            <span>/</span>
+                        <div className="flex items-center gap-2 text-brand-blue text-sm font-bold mb-1">
+                            <Link to="/dashboard" className="hover:text-brand-red">Dashboard</Link>
+                            <span className="text-slate-300">/</span>
                             <span className="text-slate-400">{survey?.company_name}</span>
                         </div>
-                        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-                            Survey Analytics
+                        <h1 className="text-3xl font-display font-black tracking-tight text-slate-900">
+                            Survey <span className="text-brand-blue">Analytics</span>
                         </h1>
                     </div>
                     <div className="flex items-center gap-3">
                         <button
                             onClick={fetchData}
-                            className="flex items-center gap-2 px-4 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm font-semibold hover:bg-slate-800 transition shadow-lg"
+                            className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition shadow-sm"
                         >
                             <RefreshCcw className="w-4 h-4" />
                             Refresh
                         </button>
                         <Link
                             to={`/surveys/${surveyId}`}
-                            className="flex items-center gap-2 px-4 py-2 bg-purple-600 rounded-lg text-sm font-semibold hover:bg-purple-500 transition shadow-lg shadow-purple-900/20"
+                            className="flex items-center gap-2 px-6 py-2 bg-brand-blue rounded-xl text-sm font-bold text-white hover:bg-blue-800 transition shadow-lg shadow-brand-blue/20"
                         >
                             <Users className="w-4 h-4" />
                             Manage Tokens
@@ -131,63 +131,63 @@ export default function Analytics() {
                 </div>
 
                 {/* Main Charts */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-left">
 
                     {/* Trends Chart */}
-                    <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
-                        <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-                            <TrendingUp className="w-5 h-5 text-purple-400" />
-                            Submission Trends (Last 30 Days)
+                    <div className="bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-xl">
+                        <h3 className="text-lg font-display font-black mb-6 flex items-center gap-2 text-slate-900">
+                            <TrendingUp className="w-5 h-5 text-brand-blue" />
+                            Submission Trends
                         </h3>
                         <div className="h-[350px]">
                             <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart data={trendsData}>
                                     <defs>
                                         <linearGradient id="colorSub" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3} />
-                                            <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="#8ACAEC" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="#8ACAEC" stopOpacity={0} />
                                         </linearGradient>
                                         <linearGradient id="colorPass" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-                                            <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="#08306B" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="#08306B" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
                                     <XAxis
                                         dataKey="_id"
-                                        stroke="#64748b"
+                                        stroke="#94a3b8"
                                         fontSize={12}
                                         tickFormatter={(val) => val.split('-').slice(1).join('/')}
                                     />
-                                    <YAxis stroke="#64748b" fontSize={12} />
+                                    <YAxis stroke="#94a3b8" fontSize={12} />
                                     <Tooltip
-                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                                        itemStyle={{ fontSize: '13px' }}
+                                        contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                                        itemStyle={{ fontSize: '13px', fontWeight: 'bold' }}
                                     />
-                                    <Legend verticalAlign="top" height={36} />
-                                    <Area type="monotone" dataKey="submissions" name="Submissions" stroke="#0ea5e9" fillOpacity={1} fill="url(#colorSub)" strokeWidth={2} />
-                                    <Area type="monotone" dataKey="passed" name="Qualified" stroke="#10b981" fillOpacity={1} fill="url(#colorPass)" strokeWidth={2} />
+                                    <Legend verticalAlign="top" height={36} iconType="circle" />
+                                    <Area type="monotone" dataKey="submissions" name="Submissions" stroke="#8ACAEC" fillOpacity={1} fill="url(#colorSub)" strokeWidth={3} />
+                                    <Area type="monotone" dataKey="passed" name="Qualified" stroke="#08306B" fillOpacity={1} fill="url(#colorPass)" strokeWidth={3} />
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
 
                     {/* Funnel Breakdown */}
-                    <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
-                        <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-                            <Filter className="w-5 h-5 text-blue-400" />
+                    <div className="bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-xl">
+                        <h3 className="text-lg font-display font-black mb-6 flex items-center gap-2 text-slate-900">
+                            <Filter className="w-5 h-5 text-brand-blue" />
                             Conversion Funnel
                         </h3>
                         <div className="h-[350px] flex flex-col items-center justify-center">
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={funnelChartData} layout="vertical" margin={{ left: 40, right: 40 }}>
                                     <XAxis type="number" hide />
-                                    <YAxis type="category" dataKey="name" stroke="#64748b" fontSize={12} width={80} />
+                                    <YAxis type="category" dataKey="name" stroke="#94a3b8" fontSize={12} width={80} />
                                     <Tooltip
-                                        cursor={{ fill: 'transparent' }}
-                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
+                                        cursor={{ fill: '#f8fafc' }}
+                                        contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
                                     />
-                                    <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={40}>
+                                    <Bar dataKey="value" radius={[0, 8, 8, 0]} barSize={40}>
                                         {funnelChartData.map((_, index) => (
                                             <Cell key={`cell-${index}`} fill={funnelChartData[index].fill} />
                                         ))}
@@ -196,12 +196,12 @@ export default function Analytics() {
                             </ResponsiveContainer>
                             <div className="mt-4 grid grid-cols-2 gap-8 w-full px-8">
                                 <div className="text-center">
-                                    <p className="text-2xl font-bold text-emerald-400">{(funnelData?.qualification_rate || 0).toFixed(1)}%</p>
-                                    <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Qualification Rate</p>
+                                    <p className="text-2xl font-black text-brand-blue">{(funnelData?.qualification_rate || 0).toFixed(1)}%</p>
+                                    <p className="text-[10px] text-slate-400 uppercase tracking-widest font-black">Qualification</p>
                                 </div>
                                 <div className="text-center">
-                                    <p className="text-2xl font-bold text-sky-400">{(funnelData?.completion_rate || 0).toFixed(1)}%</p>
-                                    <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Completion Rate</p>
+                                    <p className="text-2xl font-black text-brand-cyan">{(funnelData?.completion_rate || 0).toFixed(1)}%</p>
+                                    <p className="text-[10px] text-slate-400 uppercase tracking-widest font-black">Completion</p>
                                 </div>
                             </div>
                         </div>
@@ -209,31 +209,31 @@ export default function Analytics() {
                 </div>
 
                 {/* Bottom Section: Orphan Audit & Sub-stats */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-left">
 
                     {/* Pass Rate Trend */}
-                    <div className="lg:col-span-2 bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
-                        <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                    <div className="lg:col-span-2 bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-xl">
+                        <h3 className="text-lg font-display font-black mb-6 text-slate-900">
                             Daily Qualification Rate (%)
                         </h3>
                         <div className="h-[250px]">
                             <ResponsiveContainer width="100%" height="100%">
                                 <LineChart data={trendsData}>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                                    <XAxis dataKey="_id" stroke="#64748b" fontSize={12} tickFormatter={(val) => val.split('-').slice(1).join('/')} />
-                                    <YAxis stroke="#64748b" fontSize={12} domain={[0, 100]} />
-                                    <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }} />
-                                    <Line type="monotone" dataKey="pass_rate" name="Pass Rate" stroke="#8b5cf6" strokeWidth={3} dot={{ r: 4, fill: '#8b5cf6' }} activeDot={{ r: 6 }} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                                    <XAxis dataKey="_id" stroke="#94a3b8" fontSize={12} tickFormatter={(val) => val.split('-').slice(1).join('/')} />
+                                    <YAxis stroke="#94a3b8" fontSize={12} domain={[0, 100]} />
+                                    <Tooltip contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px' }} />
+                                    <Line type="monotone" dataKey="pass_rate" name="Pass Rate" stroke="#08306B" strokeWidth={4} dot={{ r: 6, fill: '#08306B', strokeWidth: 2, stroke: '#fff' }} activeDot={{ r: 8 }} />
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
 
                     {/* Orphan Issues Pie */}
-                    <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
-                        <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                            <ShieldAlert className="w-5 h-5 text-amber-400" />
-                            Webhook Audit Logs
+                    <div className="bg-white border border-slate-100 rounded-[2.5rem] p-8 shadow-xl">
+                        <h3 className="text-lg font-display font-black mb-4 flex items-center gap-2 text-slate-900">
+                            <ShieldAlert className="w-5 h-5 text-brand-red" />
+                            Security Audit
                         </h3>
                         <div className="h-[200px]">
                             <ResponsiveContainer width="100%" height="100%">
@@ -242,29 +242,30 @@ export default function Analytics() {
                                         data={orphanChartData}
                                         innerRadius={60}
                                         outerRadius={80}
-                                        paddingAngle={5}
+                                        paddingAngle={8}
                                         dataKey="value"
+                                        stroke="none"
                                     >
                                         {orphanChartData.map((_entry: any, index: number) => (
                                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                         ))}
                                     </Pie>
-                                    <Tooltip />
+                                    <Tooltip contentStyle={{ borderRadius: '12px' }} />
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
                         <div className="mt-4 space-y-2">
                             {orphanData?.categories.map((c: any, i: number) => (
-                                <div key={c._id} className="flex items-center justify-between text-xs px-2 py-1.5 rounded bg-slate-800/50 border border-slate-700/50">
+                                <div key={c._id} className="flex items-center justify-between text-xs px-3 py-2 rounded-xl bg-slate-50 border border-slate-100">
                                     <div className="flex items-center gap-2 truncate pr-2">
                                         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }}></div>
-                                        <span className="text-slate-300 truncate">{c._id.replace('invalid_transition_', '').replace('_', ' ')}</span>
+                                        <span className="text-slate-600 font-bold truncate">{c._id.replace('invalid_transition_', '').replace('_', ' ')}</span>
                                     </div>
-                                    <span className="font-bold">{c.count}</span>
+                                    <span className="font-black text-slate-900">{c.count}</span>
                                 </div>
                             ))}
                             {(!orphanData || orphanData.categories.length === 0) && (
-                                <p className="text-center text-slate-500 text-sm italic">No orphan attempts logged.</p>
+                                <p className="text-center text-slate-400 text-sm italic py-4">No security events logged.</p>
                             )}
                         </div>
                     </div>
@@ -277,25 +278,32 @@ export default function Analytics() {
 
 function StatCard({ title, value, icon, trend, color }: any) {
     const borderColors: any = {
-        sky: 'border-sky-500/20 hover:border-sky-500/50',
-        emerald: 'border-emerald-500/20 hover:border-emerald-500/50',
-        rose: 'border-rose-500/20 hover:border-rose-500/50',
-        amber: 'border-amber-500/20 hover:border-amber-500/50'
+        sky: 'border-brand-blue/10 hover:border-brand-blue/30',
+        emerald: 'border-brand-cyan/10 hover:border-brand-cyan/30',
+        rose: 'border-brand-red/10 hover:border-brand-red/30',
+        amber: 'border-slate-200 hover:border-slate-300'
+    };
+
+    const iconBgs: any = {
+        sky: 'bg-brand-blue/5',
+        emerald: 'bg-brand-cyan/5',
+        rose: 'bg-brand-red/5',
+        amber: 'bg-slate-50'
     };
 
     return (
-        <div className={`bg-slate-900/50 border ${borderColors[color] || 'border-slate-800'} p-6 rounded-2xl shadow-xl transition-all hover:scale-[1.02] cursor-default backdrop-blur-sm`}>
+        <div className={`bg-white border ${borderColors[color] || 'border-slate-100'} p-6 rounded-[2rem] shadow-lg transition-all hover:scale-[1.02] cursor-default text-left`}>
             <div className="flex justify-between items-start mb-4">
-                <div className="p-2 bg-slate-950 rounded-lg border border-slate-800">
+                <div className={`p-4 ${iconBgs[color] || 'bg-slate-50'} rounded-2xl`}>
                     {icon}
                 </div>
                 <div className="text-right">
-                    <p className="text-sm font-medium text-slate-400">{title}</p>
-                    <h4 className="text-3xl font-extrabold mt-1">{value.toLocaleString()}</h4>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{title}</p>
+                    <h4 className="text-3xl font-display font-black mt-1 text-slate-900">{value.toLocaleString()}</h4>
                 </div>
             </div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-                <ArrowRight className="w-3 h-3" />
+            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 w-fit px-3 py-1 rounded-full border border-slate-100">
+                <ArrowRight className="w-3 h-3 text-brand-blue" />
                 {trend}
             </div>
         </div>

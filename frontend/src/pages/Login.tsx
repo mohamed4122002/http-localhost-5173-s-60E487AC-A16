@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../services/api';
 import { motion } from 'framer-motion';
-import { ShieldCheck, ArrowRight, User, Lock, Loader2 } from 'lucide-react';
+import { ArrowRight, User, Lock, Loader2 } from 'lucide-react';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -33,51 +33,49 @@ export default function Login() {
   };
 
   return (
-    <div className="relative min-h-screen bg-brand-dark flex items-center justify-center p-6 overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[20%] left-[15%] w-96 h-96 bg-brand-accent/30 rounded-full blur-[100px]"
-        />
-        <motion.div
-          animate={{ x: [0, -40, 0], y: [0, 50, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[20%] right-[15%] w-[30rem] h-[30rem] bg-indigo-600/20 rounded-full blur-[120px]"
-        />
+    <div className="min-h-screen bg-brand-dark flex flex-col justify-center py-12 px-6 lg:px-8 relative overflow-hidden font-sans text-slate-900">
+      {/* Soft Light Background Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-brand-blue/5 rounded-full blur-[140px]"></div>
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-brand-glow/5 rounded-full blur-[140px]"></div>
       </div>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 w-full max-w-lg glass-card rounded-[2.5rem] p-12 border border-white/10"
+        className="relative z-10 w-full max-w-md mx-auto bg-white rounded-[2.5rem] p-10 shadow-2xl border border-slate-100"
       >
-        <div className="flex flex-col items-center mb-10">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-accent to-fuchsia-500 flex items-center justify-center shadow-accent-glow mb-6">
-            <ShieldCheck className="text-white w-8 h-8" />
-          </div>
-          <h1 className="text-4xl font-display font-black text-white text-center">
-            Welcome <span className="text-brand-glow">Back</span>
-          </h1>
-          <p className="mt-3 text-slate-400 text-center font-medium">
-            Access your secure survey command center.
-          </p>
+        <div className="sm:mx-auto sm:w-full sm:max-auto text-center">
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="inline-flex items-center justify-center p-4 bg-white rounded-[2rem] shadow-xl border border-slate-100 mb-8"
+          >
+            <img
+              src="/brand/logo-icon.png"
+              alt="Marketeers Logo"
+              className="w-12 h-12 object-contain"
+            />
+          </motion.div>
+          <h2 className="text-4xl font-black font-display tracking-tight text-slate-900 mb-2">
+            Welcome <span className="text-brand-blue italic font-light">Back</span>
+          </h2>
+          <p className="text-slate-500 font-medium">Access your verification control board</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Username</label>
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Member Identity</label>
             <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-brand-accent transition-colors">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-brand-blue transition-colors">
                 <User className="w-5 h-5" />
               </div>
               <input
                 type="text"
                 required
-                className="w-full bg-slate-950/50 border border-white/5 rounded-2xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-brand-accent/50 focus:ring-4 focus:ring-brand-accent/10 transition-all placeholder:text-slate-600"
-                placeholder="Enter your username"
+                className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 py-4 text-slate-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/5 transition-all placeholder:text-slate-400 font-bold"
+                placeholder="name@company.com"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -85,15 +83,15 @@ export default function Login() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Password</label>
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Secure Key</label>
             <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-brand-accent transition-colors">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-brand-blue transition-colors">
                 <Lock className="w-5 h-5" />
               </div>
               <input
                 type="password"
                 required
-                className="w-full bg-slate-950/50 border border-white/5 rounded-2xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-brand-accent/50 focus:ring-4 focus:ring-brand-accent/10 transition-all placeholder:text-slate-600"
+                className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 py-4 text-slate-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/5 transition-all placeholder:text-slate-400 font-bold"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -128,11 +126,11 @@ export default function Login() {
         </form>
 
         <div className="mt-10 text-center">
-          <p className="text-slate-400 text-sm font-medium">
+          <p className="text-slate-500 text-sm font-medium">
             New to the platform?{' '}
             <button
               onClick={() => navigate('/signup')}
-              className="text-brand-glow hover:text-white font-bold transition-colors underline decoration-brand-glow/30"
+              className="text-brand-blue hover:underline font-bold transition-colors"
             >
               Construct Account
             </button>

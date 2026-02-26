@@ -1,23 +1,79 @@
+/* ─── Pangram Sans — Self-hosted ─────────────────────────────────────────── */
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/Pangram-ExtraLight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/Pangram-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/Pangram-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/Pangram-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/Pangram-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/Pangram-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("/fonts/Pangram-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --brand-glow-rgb: 192, 132, 252;
-    --brand-accent-rgb: 139, 92, 246;
+    --brand-glow-rgb: 222, 124, 126;
+    --brand-accent-rgb: 205, 57, 59;
   }
 
   body {
-    background-color: #020617;
-    /* Matches brand.dark */
-    color: theme('colors.slate.100');
+    background-color: theme('colors.brand.dark');
+    color: theme('colors.slate.900');
     font-family: theme('fontFamily.sans');
   }
 
   ::selection {
-    background-color: rgba(139, 92, 246, 0.3);
-    /* brand-accent with 30% opacity */
+    background-color: rgba(37, 94, 145, 0.1);
+    color: theme('colors.brand.blue');
   }
 
   h1,
@@ -30,11 +86,8 @@
 
 @layer components {
   .glass-card {
-    background-color: rgba(15, 23, 42, 0.6);
-    /* brand-surface/60 */
-    backdrop-filter: blur(24px);
-    /* backdrop-blur-xl */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #FFFFFF;
+    border: 1px solid theme('colors.brand.border');
     box-shadow: theme('boxShadow.glass');
   }
 
@@ -47,7 +100,7 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 15px rgba(192, 132, 252, 0.5);
+    text-shadow: 0 0 15px rgba(222, 124, 126, 0.5);
   }
 
   .btn-premium {
@@ -58,15 +111,15 @@
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
-    background-image: linear-gradient(to right, theme('colors.brand.accent'), #c026d3);
-    /* to fuchsia-600 */
+    background-image: linear-gradient(to right, theme('colors.brand.accent'), #b91c1c);
+    /* to red-700 */
     color: white;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 4px 15px rgba(205, 57, 59, 0.2);
   }
 
   .btn-premium:hover {
     filter: brightness(1.1);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 20px rgba(205, 57, 59, 0.5);
   }
 
   .btn-premium:active {
@@ -80,12 +133,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #020617;
-  /* brand-dark */
+  background-color: theme('colors.brand.dark');
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: theme('colors.slate.800');
+  background-color: theme('colors.slate.200');
   border-radius: 9999px;
 }
 

@@ -70,25 +70,25 @@ export default function AnalyticsDashboard() {
         <div className="space-y-10">
             {/* Premium Header */}
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                <div className="space-y-4">
+                <div className="space-y-4 text-left">
                     <div className="flex items-center gap-2">
-                        <Link to="/dashboard" className="p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                        <Link to="/dashboard" className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors text-slate-500">
                             <ArrowLeft className="w-4 h-4" />
                         </Link>
-                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
-                            Intelligence <span className="text-brand-glow">Layer</span>
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+                            Intelligence <span className="text-brand-blue">Layer</span>
                         </div>
                     </div>
-                    <h1 className="text-4xl font-display font-black tracking-tight">
-                        {survey?.company_name} <span className="text-slate-500 font-light">Audit</span>
+                    <h1 className="text-4xl font-display font-black tracking-tight text-slate-900">
+                        {survey?.company_name} <span className="text-slate-400 font-light">Audit</span>
                     </h1>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-4">
                     <div className="relative group">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-accent transition-colors" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-brand-blue transition-colors" />
                         <select
-                            className="pl-11 pr-10 py-3 bg-brand-surface/40 backdrop-blur-xl border border-white/5 rounded-2xl text-sm font-bold focus:outline-none focus:border-brand-accent/50 transition-all appearance-none cursor-pointer"
+                            className="pl-11 pr-10 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-bold text-slate-900 focus:outline-none focus:border-brand-blue/50 transition-all appearance-none cursor-pointer shadow-sm"
                             value={surveyId}
                             onChange={(e) => window.location.href = `/analytics/${e.target.value}`}
                         >
@@ -100,17 +100,17 @@ export default function AnalyticsDashboard() {
 
                     <button
                         onClick={fetchData}
-                        className="p-3 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-all text-slate-400 hover:text-white"
+                        className="p-3 bg-white border border-slate-200 rounded-2xl hover:bg-slate-50 transition-all text-slate-400 hover:text-brand-blue shadow-sm"
                     >
                         <RefreshCcw className="w-5 h-5" />
                     </button>
 
-                    <div className="bg-white/5 p-1 rounded-2xl flex border border-white/5">
+                    <div className="bg-slate-100 p-1 rounded-2xl flex border border-slate-200 shadow-inner">
                         {[7, 30, 90].map(d => (
                             <button
                                 key={d}
                                 onClick={() => setDays(d)}
-                                className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${days === d ? 'bg-brand-accent text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
+                                className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${days === d ? 'bg-brand-blue text-white shadow-md' : 'text-slate-500 hover:text-slate-900'}`}
                             >
                                 {d}D
                             </button>
@@ -143,7 +143,7 @@ export default function AnalyticsDashboard() {
                     value={funnelData?.submitted || 0}
                     icon={Activity}
                     trend={(funnelData?.completion_rate || 0).toFixed(1) + '% Success'}
-                    color="accent"
+                    color="blue"
                 />
                 <AnalyticsCard
                     label="User Qualification"
@@ -157,28 +157,28 @@ export default function AnalyticsDashboard() {
                     value={funnelData?.failed || 0}
                     icon={Lock}
                     trend="Automated Rejection"
-                    color="rose"
+                    color="red"
                 />
                 <AnalyticsCard
                     label="Security Events"
                     value={orphanData?.total_attempts || 0}
                     icon={ShieldAlert}
                     trend="Orphan Webhooks Blocked"
-                    color="amber"
+                    color="orange"
                 />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-8">
                     {/* Main Trends Table */}
-                    <div className="glass-card rounded-[2.5rem] p-8 border border-white/5">
+                    <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl">
                         <div className="flex items-center justify-between mb-10 text-left">
                             <div>
-                                <h3 className="text-xl font-display font-black">Performance <span className="text-brand-glow">Velocity</span></h3>
-                                <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">Daily interaction metrics</p>
+                                <h3 className="text-xl font-display font-black text-slate-900">Performance <span className="text-brand-blue">Velocity</span></h3>
+                                <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Daily interaction metrics</p>
                             </div>
-                            <div className="p-2 rounded-xl bg-brand-accent/10">
-                                <TrendingUp className="w-5 h-5 text-brand-accent" />
+                            <div className="p-3 rounded-xl bg-brand-blue/10">
+                                <TrendingUp className="w-5 h-5 text-brand-blue" />
                             </div>
                         </div>
                         <div className="h-[400px]">
@@ -186,36 +186,36 @@ export default function AnalyticsDashboard() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="glass-card rounded-3xl p-8 border border-white/5 flex flex-col items-center justify-center text-center">
-                            <div className="p-4 rounded-full bg-cyan-400/10 text-cyan-400 mb-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                        <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 flex flex-col items-center justify-center text-center shadow-lg">
+                            <div className="p-4 rounded-full bg-brand-blue/5 text-brand-blue mb-6 border border-brand-blue/10">
                                 <MousePointer2 className="w-8 h-8" />
                             </div>
-                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Participant Pulse</p>
-                            <p className="text-4xl font-display font-black text-white">12m 45s</p>
-                            <p className="text-xs text-slate-400 font-medium mt-3">Avg. Attention Duration</p>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Participant Pulse</p>
+                            <p className="text-4xl font-display font-black text-slate-900">12m 45s</p>
+                            <p className="text-xs text-slate-500 font-medium mt-3">Avg. Attention Duration</p>
                         </div>
-                        <div className="glass-card rounded-3xl p-8 border border-white/5 flex flex-col items-center justify-center text-center">
-                            <div className="p-4 rounded-full bg-rose-500/10 text-rose-500 mb-6">
+                        <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 flex flex-col items-center justify-center text-center shadow-lg">
+                            <div className="p-4 rounded-full bg-brand-red/5 text-brand-red mb-6 border border-brand-red/10">
                                 <Globe className="w-8 h-8" />
                             </div>
-                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Dropout Index</p>
-                            <p className="text-4xl font-display font-black text-rose-500">{(funnelData?.drop_off_rate || 0).toFixed(1)}%</p>
-                            <p className="text-xs text-slate-400 font-medium mt-3">Pre-submission Abandonment</p>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Dropout Index</p>
+                            <p className="text-4xl font-display font-black text-brand-red">{(funnelData?.drop_off_rate || 0).toFixed(1)}%</p>
+                            <p className="text-xs text-slate-500 font-medium mt-3">Pre-submission Abandonment</p>
                         </div>
                     </div>
                 </div>
 
-                <div className="space-y-8">
-                    <div className="glass-card rounded-[2.5rem] p-8 border border-white/5">
-                        <h3 className="text-xl font-display font-black mb-8">Conversion <span className="text-brand-glow">Funnel</span></h3>
+                <div className="space-y-8 text-left">
+                    <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl">
+                        <h3 className="text-xl font-display font-black mb-8 text-slate-900">Conversion <span className="text-brand-blue">Funnel</span></h3>
                         <FunnelChart data={funnelData} />
                     </div>
 
-                    <div className="glass-card rounded-[2.5rem] p-8 border border-white/5">
+                    <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl">
                         <div className="flex items-center justify-between mb-8">
-                            <h3 className="text-xl font-display font-black">Security <span className="text-rose-500">Audit</span></h3>
-                            <ShieldAlert className="w-5 h-5 text-rose-500 animate-pulse" />
+                            <h3 className="text-xl font-display font-black text-slate-900">Security <span className="text-brand-red">Audit</span></h3>
+                            <ShieldAlert className="w-5 h-5 text-brand-red animate-pulse" />
                         </div>
                         <OrphanAuditTable data={orphanData} />
                     </div>
@@ -227,29 +227,36 @@ export default function AnalyticsDashboard() {
 
 function AnalyticsCard({ label, value, icon: Icon, trend, color }: any) {
     const colors: any = {
-        accent: 'text-brand-glow bg-brand-accent/10',
-        cyan: 'text-cyan-400 bg-cyan-400/10',
-        rose: 'text-rose-400 bg-rose-400/10',
-        amber: 'text-amber-400 bg-amber-400/10',
+        blue: 'text-brand-blue bg-brand-blue/5 border-brand-blue/10',
+        cyan: 'text-brand-cyan bg-brand-cyan/5 border-brand-cyan/10',
+        red: 'text-brand-red bg-brand-red/5 border-brand-red/10',
+        orange: 'text-orange-500 bg-orange-50 border-orange-100',
+    };
+
+    const dotColors: any = {
+        blue: 'bg-brand-blue',
+        cyan: 'bg-brand-cyan',
+        red: 'bg-brand-red',
+        orange: 'bg-orange-500',
     };
 
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-card rounded-[2rem] p-8 border border-white/5 hover:border-brand-accent/30 transition-all cursor-default group"
+            className="bg-white rounded-[2.5rem] p-8 border border-slate-100 hover:border-brand-blue/30 transition-all cursor-default group shadow-sm hover:shadow-xl text-left"
         >
             <div className="flex justify-between items-start mb-6">
-                <div className={`p-4 rounded-2xl ${colors[color] || colors.accent} group-hover:scale-110 transition-transform`}>
+                <div className={`p-4 rounded-2xl ${colors[color] || colors.blue} border group-hover:scale-110 transition-transform`}>
                     <Icon className="w-6 h-6" />
                 </div>
                 <div className="text-right">
-                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">{label}</p>
-                    <p className="text-3xl font-display font-black text-white group-hover:text-brand-glow transition-colors">{value.toLocaleString()}</p>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</p>
+                    <p className="text-3xl font-display font-black text-slate-900 group-hover:text-brand-blue transition-colors">{value.toLocaleString()}</p>
                 </div>
             </div>
-            <div className="flex items-center gap-2 text-[10px] font-bold text-slate-500 bg-white/5 w-fit px-3 py-1.5 rounded-full border border-white/5">
-                <div className={`w-1.5 h-1.5 rounded-full ${color === 'rose' ? 'bg-rose-500' : 'bg-emerald-400 animate-pulse'}`}></div>
+            <div className="flex items-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 w-fit px-3 py-1.5 rounded-full border border-slate-100 shadow-inner">
+                <div className={`w-1.5 h-1.5 rounded-full ${color === 'red' ? dotColors[color] : `${dotColors[color]} animate-pulse`}`}></div>
                 {trend}
             </div>
         </motion.div>

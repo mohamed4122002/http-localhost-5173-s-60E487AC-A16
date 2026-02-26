@@ -123,32 +123,32 @@ export default function TokenManagement() {
     return (
         <div className="space-y-10">
             {/* Premium Header */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 text-left">
                 <div className="space-y-4">
                     <div className="flex items-center gap-2">
-                        <Link to="/dashboard" className="p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                        <Link to="/dashboard" className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors text-slate-500">
                             <ArrowLeft className="w-4 h-4" />
                         </Link>
-                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
-                            Access <span className="text-brand-glow">Repository</span>
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+                            Access <span className="text-brand-blue">Repository</span>
                         </div>
                     </div>
-                    <h1 className="text-4xl font-display font-black tracking-tight">
-                        Token <span className="text-slate-500 font-light">Management</span>
+                    <h1 className="text-4xl font-display font-black tracking-tight text-slate-900">
+                        Token <span className="text-slate-400 font-light">Management</span>
                     </h1>
-                    <p className="text-slate-400 font-medium">Monitoring distribution for <span className="text-white">{survey.company_name}</span></p>
+                    <p className="text-slate-500 font-medium">Monitoring distribution for <span className="text-slate-900 font-black">{survey.company_name}</span></p>
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <div className="glass-card flex items-center gap-4 px-6 py-3 rounded-2xl border border-white/5">
+                    <div className="bg-white flex items-center gap-4 px-8 py-4 rounded-[2rem] border border-slate-100 shadow-xl">
                         <div>
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Total Pool</p>
-                            <p className="text-xl font-display font-black text-white">{summary.total}</p>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Total Pool</p>
+                            <p className="text-2xl font-display font-black text-slate-900">{summary.total}</p>
                         </div>
-                        <div className="w-px h-8 bg-white/5"></div>
+                        <div className="w-px h-10 bg-slate-100"></div>
                         <div>
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Active</p>
-                            <p className="text-xl font-display font-black text-brand-glow">{summary.unused}</p>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Active</p>
+                            <p className="text-2xl font-display font-black text-brand-blue">{summary.unused}</p>
                         </div>
                     </div>
                 </div>
@@ -156,23 +156,23 @@ export default function TokenManagement() {
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 {/* Left: Controls */}
-                <div className="space-y-6">
-                    <div className="glass-card rounded-[2.5rem] p-8 border border-white/5">
+                <div className="space-y-6 text-left">
+                    <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl">
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="p-2.5 rounded-xl bg-brand-accent/10 text-brand-accent">
+                            <div className="p-2.5 rounded-xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10">
                                 <Zap className="w-5 h-5" />
                             </div>
-                            <h3 className="text-lg font-display font-black">Bulk <span className="text-brand-glow">Allocation</span></h3>
+                            <h3 className="text-lg font-display font-black text-slate-900">Bulk <span className="text-brand-blue">Allocation</span></h3>
                         </div>
 
                         <div className="space-y-6">
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Distribution size</label>
+                            <div className="space-y-4">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Distribution size</label>
                                 <input
                                     type="number"
                                     min="1"
                                     max="500"
-                                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-5 py-3 text-white focus:outline-none focus:border-brand-accent/50 focus:ring-4 focus:ring-brand-accent/10 transition-all font-bold"
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-slate-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/5 transition-all font-bold shadow-inner"
                                     value={genCount}
                                     onChange={(e) => setGenCount(parseInt(e.target.value))}
                                 />
@@ -180,23 +180,23 @@ export default function TokenManagement() {
                             <button
                                 onClick={handleGenerate}
                                 disabled={loading}
-                                className="btn-premium w-full py-4 text-white flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/20 font-black tracking-wide"
+                                className="w-full py-4 bg-brand-blue text-white rounded-2xl flex items-center justify-center gap-2 group shadow-xl hover:shadow-brand-blue/20 transition-all font-black tracking-wide text-xs uppercase tracking-widest"
                             >
                                 {loading ? <Clock className="w-5 h-5 animate-spin" /> : <><Plus className="w-5 h-5" /> Provision Tokens</>}
                             </button>
-                            <p className="text-[10px] text-slate-500 text-center font-bold px-4 leading-relaxed uppercase tracking-tighter">
+                            <p className="text-[10px] text-slate-400 text-center font-bold px-4 leading-relaxed uppercase tracking-tighter">
                                 Each token is cryptographically secure and strictly single-use.
                             </p>
                         </div>
                     </div>
 
-                    <div className="glass-card rounded-3xl p-8 border border-white/5">
-                        <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6">Frictionless Lifecycle</h4>
-                        <div className="space-y-4">
+                    <div className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-xl">
+                        <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Frictionless Lifecycle</h4>
+                        <div className="space-y-5">
                             <LifecycleItem icon={Plus} label="Allocated" value={summary.total} color="slate" />
-                            <LifecycleItem icon={Clock} label="Pending" value={summary.unused} color="brand" />
+                            <LifecycleItem icon={Clock} label="Pending" value={summary.unused} color="blue" />
                             <LifecycleItem icon={CheckCircle2} label="Qualified" value={summary.passed} color="emerald" />
-                            <LifecycleItem icon={ShieldAlert} label="Restricted" value={summary.failed} color="rose" />
+                            <LifecycleItem icon={ShieldAlert} label="Restricted" value={summary.failed} color="red" />
                             <LifecycleItem icon={ExternalLink} label="Finalized" value={summary.submitted} color="cyan" />
                         </div>
                     </div>
@@ -207,9 +207,9 @@ export default function TokenManagement() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
                         <div className="flex items-center gap-3">
                             <div className="relative group">
-                                <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-500" />
+                                <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400" />
                                 <select
-                                    className="pl-9 pr-8 py-2.5 bg-brand-surface/40 backdrop-blur-xl border border-white/5 rounded-xl text-xs font-black uppercase tracking-widest focus:outline-none focus:border-brand-accent/50 transition-all appearance-none cursor-pointer"
+                                    className="pl-9 pr-8 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-black uppercase tracking-widest focus:outline-none focus:border-brand-blue/50 transition-all appearance-none cursor-pointer shadow-sm text-slate-600"
                                     value={statusFilter}
                                     onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
                                 >
@@ -219,6 +219,7 @@ export default function TokenManagement() {
                                     <option value="failed">Restricted</option>
                                     <option value="submitted">Finalized</option>
                                 </select>
+                                <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-300 pointer-events-none rotate-90" />
                             </div>
 
                             <AnimatePresence>
@@ -229,7 +230,7 @@ export default function TokenManagement() {
                                         exit={{ opacity: 0, scale: 0.9 }}
                                         onClick={handleBulkInvalidate}
                                         disabled={bulkLoading}
-                                        className="bg-rose-500/10 border border-rose-500/20 text-rose-400 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-rose-500/20 transition flex items-center gap-2"
+                                        className="bg-brand-red/5 border border-brand-red/10 text-brand-red px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-red/10 transition-all flex items-center gap-2 shadow-sm"
                                     >
                                         <ShieldAlert className="w-4 h-4" />
                                         Restrict Selected ({selectedTokens.length})
@@ -239,21 +240,21 @@ export default function TokenManagement() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                            <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">
-                                Slice {page} <span className="text-slate-700">of</span> {Math.ceil(totalTokens / 20) || 1}
+                            <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 shadow-inner">
+                                Slice {page} <span className="text-slate-300">of</span> {Math.ceil(totalTokens / 20) || 1}
                             </span>
-                            <div className="flex gap-1.5">
+                            <div className="flex gap-2">
                                 <button
                                     onClick={() => setPage(p => Math.max(1, p - 1))}
                                     disabled={page === 1}
-                                    className="p-2.5 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-all disabled:opacity-20"
+                                    className="p-2.5 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-all disabled:opacity-30 shadow-sm text-slate-400"
                                 >
                                     <ChevronLeft className="w-4 h-4" />
                                 </button>
                                 <button
                                     onClick={() => setPage(p => p + 1)}
                                     disabled={page >= Math.ceil(totalTokens / 20)}
-                                    className="p-2.5 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-all disabled:opacity-20"
+                                    className="p-2.5 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-all disabled:opacity-30 shadow-sm text-slate-400"
                                 >
                                     <ChevronRight className="w-4 h-4" />
                                 </button>
@@ -261,16 +262,16 @@ export default function TokenManagement() {
                         </div>
                     </div>
 
-                    <div className="glass-card rounded-[2.5rem] border border-white/5 overflow-hidden relative">
+                    <div className="bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden relative shadow-xl text-left">
                         <AnimatePresence>
                             {loading && (
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm flex items-center justify-center z-50"
+                                    className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-50"
                                 >
-                                    <div className="w-10 h-10 rounded-full border-2 border-t-brand-accent border-white/10 animate-spin"></div>
+                                    <div className="w-12 h-12 rounded-full border-4 border-slate-100 border-t-brand-blue animate-spin shadow-inner"></div>
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -278,50 +279,50 @@ export default function TokenManagement() {
                         <div className="overflow-x-auto">
                             <table className="w-full border-collapse">
                                 <thead>
-                                    <tr className="border-b border-white/5 bg-white/2 pb-10">
+                                    <tr className="border-b border-slate-100 bg-slate-50/50">
                                         <th className="px-8 py-6 text-left w-10">
                                             <input
                                                 type="checkbox"
-                                                className="w-5 h-5 rounded-lg border-white/10 bg-black/40 text-brand-accent focus:ring-brand-accent transition-all cursor-pointer"
+                                                className="w-5 h-5 rounded-lg border-slate-200 bg-white text-brand-blue focus:ring-brand-blue/20 transition-all cursor-pointer shadow-sm"
                                                 checked={selectedTokens.length > 0 && selectedTokens.length === tokenList.length}
                                                 onChange={toggleSelectAll}
                                             />
                                         </th>
-                                        <th className="px-8 py-6 text-left text-[10px] font-black uppercase tracking-widest text-slate-500">Security String</th>
-                                        <th className="px-8 py-6 text-left text-[10px] font-black uppercase tracking-widest text-slate-500">Audit Node</th>
-                                        <th className="px-8 py-6 text-left text-[10px] font-black uppercase tracking-widest text-slate-500">Status</th>
-                                        <th className="px-8 py-6 text-right text-[10px] font-black uppercase tracking-widest text-slate-500">Actions</th>
+                                        <th className="px-8 py-6 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Security String</th>
+                                        <th className="px-8 py-6 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Audit Node</th>
+                                        <th className="px-8 py-6 text-left text-[10px] font-black uppercase tracking-widest text-slate-400">Status</th>
+                                        <th className="px-8 py-6 text-right text-[10px] font-black uppercase tracking-widest text-slate-400">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-white/5">
+                                <tbody className="divide-y divide-slate-50">
                                     {tokenList.map((t: any, idx) => (
                                         <motion.tr
                                             key={t._id}
                                             initial={{ opacity: 0, x: -10 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: idx * 0.02 }}
-                                            className={`group transition-all hover:bg-white/2 ${selectedTokens.includes(t._id) ? 'bg-brand-accent/5' : ''}`}
+                                            className={`group transition-all hover:bg-slate-50 ${selectedTokens.includes(t._id) ? 'bg-brand-blue/5' : ''}`}
                                         >
                                             <td className="px-8 py-5">
                                                 <input
                                                     type="checkbox"
-                                                    className="w-5 h-5 rounded-lg border-white/10 bg-black/40 text-brand-accent focus:ring-brand-accent transition-all cursor-pointer"
+                                                    className="w-5 h-5 rounded-lg border-slate-200 bg-white text-brand-blue focus:ring-brand-blue/20 transition-all cursor-pointer shadow-sm"
                                                     checked={selectedTokens.includes(t._id)}
                                                     onChange={() => toggleTokenSelection(t._id)}
                                                 />
                                             </td>
                                             <td className="px-8 py-5">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="p-2 rounded-lg bg-white/5 text-slate-400 group-hover:text-brand-glow transition-colors">
+                                                    <div className="p-2 rounded-lg bg-slate-100 text-slate-400 group-hover:text-brand-blue group-hover:bg-brand-blue/5 border border-transparent group-hover:border-brand-blue/10 transition-all shadow-sm">
                                                         <Database className="w-4 h-4" />
                                                     </div>
-                                                    <code className="text-xs font-mono font-bold text-slate-300 tracking-tight group-hover:text-white transition-colors">
-                                                        {t.token.slice(0, 16)}<span className="text-slate-700">...</span>
+                                                    <code className="text-xs font-mono font-black text-slate-500 tracking-tight group-hover:text-slate-900 transition-colors">
+                                                        {t.token.slice(0, 16)}<span className="text-slate-300">...</span>
                                                     </code>
                                                 </div>
                                             </td>
                                             <td className="px-8 py-5">
-                                                <span className="text-[10px] font-black text-slate-600 font-mono tracking-tighter uppercase">{t.batch_id.slice(0, 12)}</span>
+                                                <span className="text-[10px] font-black text-slate-400 font-mono tracking-tighter uppercase bg-slate-100 px-2 py-1 rounded-md border border-slate-200">{t.batch_id.slice(0, 12)}</span>
                                             </td>
                                             <td className="px-8 py-5">
                                                 <StatusBadge status={t.status} />
@@ -329,7 +330,7 @@ export default function TokenManagement() {
                                             <td className="px-8 py-5 text-right">
                                                 <button
                                                     onClick={() => copyToClipboard(t.token)}
-                                                    className="p-2.5 rounded-xl bg-white/5 hover:bg-brand-accent/10 hover:text-brand-accent text-slate-400 transition-all group/btn"
+                                                    className="p-2.5 rounded-xl bg-slate-50 hover:bg-brand-blue text-slate-400 hover:text-white transition-all group/btn border border-slate-100 shadow-sm"
                                                 >
                                                     <Copy className="w-4 h-4" />
                                                 </button>
@@ -338,14 +339,14 @@ export default function TokenManagement() {
                                     ))}
                                     {tokenList.length === 0 && !loading && (
                                         <tr>
-                                            <td colSpan={5} className="px-8 py-20 text-center">
-                                                <div className="flex flex-col items-center gap-4">
-                                                    <div className="p-6 rounded-full bg-white/2 border border-white/5">
-                                                        <Activity className="w-12 h-12 text-slate-700" />
+                                            <td colSpan={5} className="px-8 py-24 text-center">
+                                                <div className="flex flex-col items-center gap-6">
+                                                    <div className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 shadow-inner text-slate-200">
+                                                        <Activity className="w-16 h-16" />
                                                     </div>
                                                     <div>
-                                                        <p className="font-display font-black text-slate-500">Repository Empty</p>
-                                                        <p className="text-xs text-slate-600 font-bold uppercase tracking-widest mt-1">No matches found for current filter</p>
+                                                        <p className="text-xl font-display font-black text-slate-400">Repository Empty</p>
+                                                        <p className="text-[10px] text-slate-300 font-black uppercase tracking-widest mt-2">No matches found for current filter</p>
                                                     </div>
                                                 </div>
                                             </td>
@@ -363,32 +364,40 @@ export default function TokenManagement() {
 
 function LifecycleItem({ icon: Icon, label, value, color }: any) {
     const colors: any = {
-        brand: 'text-brand-glow',
-        emerald: 'text-emerald-400',
-        rose: 'text-rose-400',
-        cyan: 'text-cyan-400',
+        blue: 'text-brand-blue',
+        emerald: 'text-emerald-600',
+        red: 'text-brand-red',
+        cyan: 'text-brand-cyan',
         slate: 'text-slate-400'
+    };
+
+    const bgColors: any = {
+        blue: 'bg-brand-blue/5 border-brand-blue/10',
+        emerald: 'bg-emerald-50 border-emerald-100',
+        red: 'bg-brand-red/5 border-brand-red/10',
+        cyan: 'bg-brand-cyan/5 border-brand-cyan/10',
+        slate: 'bg-slate-50 border-slate-100'
     };
 
     return (
         <div className="flex items-center justify-between group">
             <div className="flex items-center gap-3">
-                <div className={`p-1.5 rounded-lg bg-white/2 border border-white/5 group-hover:border-white/10 transition-colors ${colors[color]}`}>
-                    <Icon className="w-3.5 h-3.5" />
+                <div className={`p-2 rounded-xl border transition-all group-hover:scale-110 ${bgColors[color]} ${colors[color]}`}>
+                    <Icon className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</span>
             </div>
-            <span className={`text-sm font-display font-black group-hover:scale-110 transition-transform ${colors[color]}`}>{value}</span>
+            <span className={`text-sm font-display font-black group-hover:translate-x-[-4px] transition-all ${colors[color]}`}>{value}</span>
         </div>
     );
 }
 
 function StatusBadge({ status }: { status: string }) {
     const styles: any = {
-        unused: 'text-brand-glow bg-brand-glow/10 border-brand-glow/20',
-        passed: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20',
-        failed: 'text-rose-400 bg-rose-400/10 border-rose-400/20',
-        submitted: 'text-cyan-400 bg-cyan-400/10 border-cyan-400/20',
+        unused: 'text-brand-blue bg-brand-blue/5 border-brand-blue/10',
+        passed: 'text-emerald-600 bg-emerald-50 border-emerald-100',
+        failed: 'text-brand-red bg-brand-red/5 border-brand-red/10',
+        submitted: 'text-brand-cyan bg-brand-cyan/5 border-brand-cyan/10',
     };
 
     return (

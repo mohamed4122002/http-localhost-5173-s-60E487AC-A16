@@ -93,39 +93,39 @@ export default function CreateSurvey() {
   return (
     <div className="space-y-10">
       {/* Premium Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 text-left">
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <Link to="/dashboard" className="p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+            <Link to="/dashboard" className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors text-slate-500">
               <ArrowLeft className="w-4 h-4" />
             </Link>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
-              Provisioning <span className="text-brand-glow">Engine</span>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+              Provisioning <span className="text-brand-blue">Engine</span>
             </div>
           </div>
-          <h1 className="text-4xl font-display font-black tracking-tight">
-            Create <span className="text-slate-500 font-light">New Survey</span>
+          <h1 className="text-4xl font-display font-black tracking-tight text-slate-900">
+            Create <span className="text-slate-400 font-light">New Survey</span>
           </h1>
-          <p className="text-slate-400 font-medium max-w-2xl">
+          <p className="text-slate-500 font-medium max-w-2xl">
             Configure a secure, gated survey environment with automated qualification rules and premium reporting.
           </p>
         </div>
 
         {/* Progress Indicator */}
-        <div className="hidden lg:flex items-center gap-4 bg-white/5 p-3 rounded-2xl border border-white/5">
+        <div className="hidden lg:flex items-center gap-4 bg-slate-100 p-3 rounded-2xl border border-slate-200 shadow-inner">
           {steps.map((s, idx) => (
             <React.Fragment key={s.id}>
               <div
-                className={`flex items-center gap-2 transition-all duration-500 ${currentStep === s.id ? 'text-brand-accent' : currentStep > s.id ? 'text-emerald-400' : 'text-slate-600'}`}
+                className={`flex items-center gap-2 transition-all duration-500 ${currentStep === s.id ? 'text-brand-blue' : currentStep > s.id ? 'text-emerald-600' : 'text-slate-400'}`}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-black border transition-all ${currentStep === s.id ? 'bg-brand-accent/10 border-brand-accent/50 shadow-[0_0_15px_rgba(139,92,246,0.3)]' :
-                  currentStep > s.id ? 'bg-emerald-500/10 border-emerald-500/50' : 'bg-transparent border-white/10'
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-black border transition-all ${currentStep === s.id ? 'bg-brand-blue text-white border-brand-blue shadow-md' :
+                  currentStep > s.id ? 'bg-emerald-50 border-emerald-200' : 'bg-white border-slate-200'
                   }`}>
                   {currentStep > s.id ? <Check className="w-4 h-4" /> : s.id}
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-widest">{s.name}</span>
               </div>
-              {idx < steps.length - 1 && <ChevronRight className="w-3 h-3 text-slate-800" />}
+              {idx < steps.length - 1 && <ChevronRight className="w-3 h-3 text-slate-300" />}
             </React.Fragment>
           ))}
         </div>
@@ -138,26 +138,26 @@ export default function CreateSurvey() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-950/80 backdrop-blur-xl"
+              className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-md"
             >
-              <div className="glass-card w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-[3rem] border border-white/10 flex flex-col">
-                <div className="p-10 border-b border-white/5 flex items-center justify-between shrink-0 bg-brand-accent/5">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">
+              <div className="bg-white w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-[3rem] border border-slate-200 flex flex-col shadow-2xl">
+                <div className="p-10 border-b border-slate-100 flex items-center justify-between shrink-0 bg-brand-blue/5">
+                  <div className="space-y-1 text-left">
+                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-600">
                       <ShieldCheck className="w-4 h-4" />
                       Protocol Synchronized
                     </div>
-                    <h2 className="text-3xl font-display font-black">Link <span className="text-brand-glow">Studio</span></h2>
+                    <h2 className="text-3xl font-display font-black text-slate-900">Link <span className="text-brand-blue">Studio</span></h2>
                   </div>
                   <button
                     onClick={() => navigate('/dashboard')}
-                    className="px-6 py-2 rounded-full bg-white/5 hover:bg-white/10 text-[10px] font-black uppercase tracking-widest transition-all"
+                    className="px-6 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-[10px] font-black uppercase tracking-widest transition-all text-slate-600 shadow-sm"
                   >
                     Go to Dashboard
                   </button>
                 </div>
 
-                <div className="flex-1 overflow-y-auto p-10 space-y-8 custom-scrollbar">
+                <div className="flex-1 overflow-y-auto p-10 space-y-8 custom-scrollbar text-left">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <StatCard label="Survey ID" value={successData._id.slice(-8).toUpperCase()} sub="Provisioned ID" />
                     <StatCard label="Link Count" value={successData.generated_tokens?.length || 0} sub="Unique Keys" />
@@ -166,7 +166,7 @@ export default function CreateSurvey() {
 
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-500">Access Key Registry</h4>
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Access Key Registry</h4>
                       <button
                         onClick={() => {
                           const blob = new Blob([successData.generated_tokens.map((t: string) => `${window.location.origin}/s/${t}`).join('\n')], { type: 'text/plain' });
@@ -177,7 +177,7 @@ export default function CreateSurvey() {
                           a.click();
                           toast.success('Registry downloaded');
                         }}
-                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-glow hover:text-white transition-colors"
+                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-blue hover:text-blue-700 transition-colors"
                       >
                         <Download className="w-3 h-3" />
                         Download Registry
@@ -187,23 +187,23 @@ export default function CreateSurvey() {
                       {successData.generated_tokens?.map((token: string, idx: number) => {
                         const url = `${window.location.origin}/s/${token}`;
                         return (
-                          <div key={token} className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/[0.07] transition-all">
-                            <div className="w-8 h-8 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center text-[10px] font-black text-slate-500 font-mono">
+                          <div key={token} className="group flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-100 hover:border-brand-blue/20 hover:bg-slate-50 transition-all shadow-sm">
+                            <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[10px] font-black text-slate-500 font-mono">
                               {idx + 1}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs font-mono text-slate-400 truncate tracking-tight">{url}</p>
+                              <p className="text-xs font-mono text-slate-500 truncate tracking-tight">{url}</p>
                             </div>
                             <button
                               onClick={() => {
                                 navigator.clipboard.writeText(url);
                                 toast.success(`Link ${idx + 1} copied`);
                               }}
-                              className="p-2.5 rounded-xl bg-white/5 hover:bg-brand-accent/20 hover:text-brand-glow transition-all"
+                              className="p-2.5 rounded-xl bg-slate-50 hover:bg-brand-blue hover:text-white transition-all text-slate-400"
                             >
                               <Copy className="w-4 h-4" />
                             </button>
-                            <a href={url} target="_blank" rel="noreferrer" className="p-2.5 rounded-xl bg-white/5 hover:bg-cyan-400/20 hover:text-cyan-400 transition-all">
+                            <a href={url} target="_blank" rel="noreferrer" className="p-2.5 rounded-xl bg-slate-50 hover:bg-brand-cyan hover:text-white transition-all text-slate-400">
                               <ExternalLink className="w-4 h-4" />
                             </a>
                           </div>
@@ -213,9 +213,9 @@ export default function CreateSurvey() {
                   </div>
                 </div>
 
-                <div className="p-8 bg-slate-900/50 border-t border-white/5 flex items-center justify-center gap-4">
-                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">System ready for deployment.</p>
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                <div className="p-8 bg-slate-50 border-t border-slate-100 flex items-center justify-center gap-4">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">System ready for deployment.</p>
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-sm" />
                 </div>
               </div>
             </motion.div>
@@ -233,21 +233,21 @@ export default function CreateSurvey() {
               className="space-y-8"
             >
               {currentStep === 1 && (
-                <div className="glass-card rounded-[2.5rem] p-10 border border-white/5">
+                <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-xl text-left">
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="p-2.5 rounded-xl bg-brand-accent/10 text-brand-accent">
+                    <div className="p-2.5 rounded-xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10">
                       <Layout className="w-5 h-5" />
                     </div>
-                    <h3 className="text-xl font-display font-black">Project <span className="text-brand-glow">Identity</span></h3>
+                    <h3 className="text-xl font-display font-black text-slate-900">Project <span className="text-brand-blue">Identity</span></h3>
                   </div>
 
                   <div className="grid grid-cols-1 gap-8">
                     <div className="space-y-4">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Enterprise Entity Name</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Enterprise Entity Name</label>
                       <input
                         type="text"
                         placeholder="e.g. Global Research Corp"
-                        className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-5 text-white focus:outline-none focus:border-brand-accent/50 focus:ring-4 focus:ring-brand-accent/10 transition-all font-bold placeholder:text-slate-700 text-lg"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-5 text-slate-900 focus:outline-none focus:border-brand-blue/50 focus:ring-4 focus:ring-brand-blue/5 transition-all font-bold placeholder:text-slate-300 text-lg shadow-inner"
                         value={formData.company_name}
                         onChange={e => setFormData({ ...formData, company_name: e.target.value })}
                         required
@@ -255,19 +255,19 @@ export default function CreateSurvey() {
                     </div>
 
                     <div className="space-y-4">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Respondent Pipeline</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Respondent Pipeline</label>
                       <div className="relative group">
-                        <Sparkles className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-accent transition-colors pointer-events-none" />
+                        <Sparkles className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-brand-blue transition-colors pointer-events-none" />
                         <input
                           type="number"
                           min="1"
                           max="1000"
                           placeholder="Number of links to provision"
-                          className="w-full bg-slate-950/50 border border-white/5 rounded-2xl pl-12 pr-6 py-5 text-white focus:outline-none focus:border-brand-accent/50 transition-all font-bold text-lg"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-6 py-5 text-slate-900 focus:outline-none focus:border-brand-blue/50 transition-all font-bold text-lg shadow-inner"
                           value={formData.link_count}
                           onChange={e => setFormData({ ...formData, link_count: parseInt(e.target.value) || 0 })}
                         />
-                        <div className="absolute right-6 top-1/2 -translate-y-1/2 text-[10px] font-black uppercase tracking-widest text-slate-700 group-focus-within:text-brand-accent transition-colors text-right">
+                        <div className="absolute right-6 top-1/2 -translate-y-1/2 text-[10px] font-black uppercase tracking-widest text-slate-300 group-focus-within:text-brand-blue transition-colors text-right">
                           Keys
                         </div>
                       </div>
@@ -277,35 +277,35 @@ export default function CreateSurvey() {
               )}
 
               {currentStep === 2 && (
-                <div className="glass-card rounded-[2.5rem] p-10 border border-white/5">
+                <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-xl text-left">
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="p-2.5 rounded-xl bg-brand-accent/10 text-brand-accent">
+                    <div className="p-2.5 rounded-xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10">
                       <Database className="w-5 h-5" />
                     </div>
-                    <h3 className="text-xl font-display font-black">Blueprint <span className="text-brand-glow">Selection</span></h3>
+                    <h3 className="text-xl font-display font-black text-slate-900">Blueprint <span className="text-brand-blue">Selection</span></h3>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {templateList.map((t: any) => (
                       <button
                         key={t._id}
                         type="button"
                         onClick={() => setFormData({ ...formData, template_id: t._id })}
-                        className={`text-left p-6 rounded-3xl border transition-all duration-300 group ${formData.template_id === t._id
-                          ? 'bg-brand-accent/10 border-brand-accent/40 ring-4 ring-brand-accent/5'
-                          : 'bg-white/2 border-white/5 hover:border-white/20 hover:bg-white/5'
+                        className={`text-left p-6 rounded-[2.5rem] border transition-all duration-300 group ${formData.template_id === t._id
+                          ? 'bg-brand-blue/5 border-brand-blue/20 ring-4 ring-brand-blue/5'
+                          : 'bg-white border-slate-100 hover:border-brand-blue/20 hover:bg-slate-50 shadow-sm'
                           }`}
                       >
                         <div className="flex items-center justify-between mb-4">
-                          <div className={`p-2 rounded-xl transition-all ${formData.template_id === t._id ? 'bg-brand-accent text-white shadow-[0_0_15px_rgba(139,92,246,0.4)]' : 'bg-white/5 text-slate-400 group-hover:text-slate-200'}`}>
-                            <Layout className="w-4 h-4" />
+                          <div className={`p-4 rounded-2xl transition-all ${formData.template_id === t._id ? 'bg-brand-blue text-white shadow-xl' : 'bg-slate-100 text-slate-400 group-hover:text-brand-blue'}`}>
+                            <Layout className="w-5 h-5" />
                           </div>
-                          {formData.template_id === t._id && <Check className="w-4 h-4 text-brand-glow" />}
+                          {formData.template_id === t._id && <Check className="w-5 h-5 text-brand-blue animate-in zoom-in" />}
                         </div>
-                        <h4 className={`text-sm font-black uppercase tracking-widest mb-1 transition-colors ${formData.template_id === t._id ? 'text-white' : 'text-slate-400'}`}>
+                        <h4 className={`text-sm font-black uppercase tracking-widest mb-1 transition-colors ${formData.template_id === t._id ? 'text-slate-900' : 'text-slate-500'}`}>
                           {t.name}
                         </h4>
-                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
                           {t.type.replace('_', ' ')} architecture
                         </p>
                       </button>
@@ -315,44 +315,44 @@ export default function CreateSurvey() {
               )}
 
               {currentStep === 3 && (
-                <div className="space-y-8">
-                  <div className="glass-card rounded-[2.5rem] p-10 border border-white/5">
+                <div className="space-y-8 text-left">
+                  <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-xl">
                     <div className="flex items-center gap-3 mb-8">
-                      <div className="p-2.5 rounded-xl bg-cyan-400/10 text-cyan-400">
+                      <div className="p-2.5 rounded-xl bg-brand-cyan/5 text-brand-cyan border border-brand-cyan/10">
                         <Globe className="w-5 h-5" />
                       </div>
-                      <h3 className="text-xl font-display font-black">Data <span className="text-cyan-400">Endpoint</span></h3>
+                      <h3 className="text-xl font-display font-black text-slate-900">Data <span className="text-brand-cyan">Endpoint</span></h3>
                     </div>
 
                     <div className="grid grid-cols-1 gap-8">
                       <div className="space-y-4">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Google Form ID</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Google Form ID</label>
                         <input
                           type="text"
                           placeholder="1FAIpQLS..."
-                          className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan-400/50 transition-all font-bold"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-slate-900 focus:outline-none focus:border-brand-cyan/50 transition-all font-bold shadow-inner"
                           value={formData.google_form_id}
                           onChange={e => setFormData({ ...formData, google_form_id: e.target.value })}
                           required
                         />
                       </div>
                       <div className="space-y-4">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Secure Delivery URL</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Secure Delivery URL</label>
                         <input
                           type="url"
                           placeholder="https://docs.google.com/forms/..."
-                          className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan-400/50 transition-all font-bold"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-slate-900 focus:outline-none focus:border-brand-cyan/50 transition-all font-bold shadow-inner"
                           value={formData.google_form_url}
                           onChange={e => setFormData({ ...formData, google_form_url: e.target.value })}
                           required
                         />
                       </div>
-                      <div className={`p-4 rounded-xl border transition-all ${formData.google_form_url.includes('{token}') ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-rose-500/5 border-rose-500/10'}`}>
+                      <div className={`p-4 rounded-xl border transition-all ${formData.google_form_url.includes('{token}') ? 'bg-emerald-50 border-emerald-100' : 'bg-brand-red/5 border-brand-red/10'}`}>
                         <div className="flex items-center gap-2 mb-1">
-                          {formData.google_form_url.includes('{token}') ? <Check className="w-4 h-4 text-emerald-500" /> : <AlertCircle className="w-4 h-4 text-rose-500" />}
-                          <span className="text-[10px] font-black uppercase tracking-widest leading-none">URL Integrity</span>
+                          {formData.google_form_url.includes('{token}') ? <Check className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-brand-red" />}
+                          <span className={`text-[10px] font-black uppercase tracking-widest leading-none ${formData.google_form_url.includes('{token}') ? 'text-emerald-700' : 'text-brand-red'}`}>URL Integrity</span>
                         </div>
-                        <p className="text-[10px] font-bold text-slate-500">
+                        <p className="text-[10px] font-bold text-slate-400">
                           {formData.google_form_url.includes('{token}') ? "Token injection verified." : "Placeholder {token} missing in URL."}
                         </p>
                       </div>
@@ -360,21 +360,21 @@ export default function CreateSurvey() {
                   </div>
 
                   {/* Setup Assistant Integrated */}
-                  <div className="p-10 bg-indigo-500/5 rounded-[3.5rem] border border-indigo-500/10">
+                  <div className="p-10 bg-slate-50 rounded-[3.5rem] border border-slate-100 shadow-inner">
                     <div className="flex items-center gap-3 mb-8">
-                      <div className="p-2.5 rounded-xl bg-indigo-400/10 text-indigo-400">
+                      <div className="p-2.5 rounded-xl bg-brand-blue/5 text-brand-blue border border-brand-blue/10">
                         <Terminal className="w-5 h-5" />
                       </div>
-                      <h3 className="text-xl font-display font-black">Setup <span className="text-indigo-400">Assistant</span></h3>
+                      <h3 className="text-xl font-display font-black text-slate-900">Setup <span className="text-brand-blue">Assistant</span></h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <div className="space-y-4">
+                      <div className="space-y-4 text-left">
                         <StepItem num={1} title="Form Visibility" desc="Ensure Form is set to public." active={formData.google_form_url.length > 20} />
                         <StepItem num={2} title="Token Field" desc="Add 'Token' field in Google Form." active={formData.google_form_url.toLowerCase().includes('token')} />
                         <StepItem num={3} title="Pre-filled" desc="Use {token} placeholder in URL." active={formData.google_form_url.includes('{token}')} />
                       </div>
-                      <div className="p-6 bg-slate-950 rounded-3xl border border-white/5 space-y-4">
+                      <div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-4">
                         <div className="flex items-center justify-between">
                           <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Google Apps Script</span>
                           <button
@@ -383,13 +383,13 @@ export default function CreateSurvey() {
                               navigator.clipboard.writeText(script);
                               toast.success('Script copied');
                             }}
-                            className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-indigo-400 transition-all"
+                            className="p-2 rounded-lg bg-slate-50 hover:bg-brand-cyan hover:text-white text-brand-cyan transition-all border border-slate-100"
                           >
                             <Copy className="w-3 h-3" />
                           </button>
                         </div>
-                        <div className="bg-slate-900/50 p-4 rounded-xl border border-white/5">
-                          <code className="text-[8px] text-slate-500 font-mono block overflow-hidden">
+                        <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 shadow-inner">
+                          <code className="text-[10px] text-slate-400 font-mono block overflow-hidden">
                             const WEBHOOK_URL = "{window.location.origin}/webhook...";
                           </code>
                         </div>
@@ -404,35 +404,35 @@ export default function CreateSurvey() {
 
         {/* Navigation Sidebar */}
         <div className="space-y-6">
-          <div className="glass-card rounded-[2.5rem] p-8 border border-white/5 sticky top-24">
-            <h3 className="text-lg font-display font-black mb-6">Phase <span className="text-brand-glow">Control</span></h3>
+          <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl sticky top-24 text-left">
+            <h3 className="text-xl font-display font-black mb-8 text-slate-900">Phase <span className="text-brand-blue">Control</span></h3>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-6 mb-10">
               {steps.map(s => (
                 <div key={s.id} className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${currentStep === s.id ? 'bg-brand-accent text-white shadow-lg shadow-brand-accent/20' :
-                    currentStep > s.id ? 'bg-emerald-500/10 text-emerald-500' : 'bg-white/5 text-slate-600'
+                  <div className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${currentStep === s.id ? 'bg-brand-blue text-white shadow-xl rotate-3' :
+                    currentStep > s.id ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-slate-50 text-slate-300'
                     }`}>
-                    {currentStep > s.id ? <Check className="w-4 h-4" /> : <s.icon className="w-4 h-4" />}
+                    {currentStep > s.id ? <Check className="w-5 h-5" /> : <s.icon className="w-5 h-5" />}
                   </div>
                   <div className="flex flex-col">
-                    <span className={`text-[10px] font-black uppercase tracking-widest ${currentStep >= s.id ? 'text-slate-200' : 'text-slate-600'}`}>
+                    <span className={`text-[10px] font-black uppercase tracking-widest ${currentStep >= s.id ? 'text-slate-900' : 'text-slate-300'}`}>
                       {s.name}
                     </span>
-                    <span className="text-[8px] font-bold text-slate-500 uppercase tracking-tight">
-                      {currentStep === s.id ? 'In Progress' : currentStep > s.id ? 'Verified' : 'Pending'}
+                    <span className={`text-[8px] font-bold uppercase tracking-tight ${currentStep === s.id ? 'text-brand-blue animate-pulse' : 'text-slate-400'}`}>
+                      {currentStep === s.id ? 'Active Operation' : currentStep > s.id ? 'Sync Verified' : 'Locked'}
                     </span>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-3 pt-6 border-t border-white/5">
+            <div className="space-y-4 pt-8 border-t border-slate-100">
               {currentStep < 3 ? (
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="btn-premium w-full py-4 text-white flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/20 font-black tracking-widest uppercase text-xs"
+                  className="w-full py-5 bg-brand-blue text-white rounded-[1.5rem] flex items-center justify-center gap-3 group shadow-xl hover:shadow-brand-blue/20 transition-all font-black tracking-widest uppercase text-xs"
                 >
                   Continue to {steps[currentStep].name}
                   <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -441,12 +441,12 @@ export default function CreateSurvey() {
                 <button
                   onClick={handleSubmit}
                   disabled={loading}
-                  className="btn-premium w-full py-4 text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20 flex items-center justify-center gap-2 group font-black tracking-widest uppercase text-xs"
+                  className="w-full py-5 bg-emerald-600 text-white rounded-[1.5rem] hover:bg-emerald-700 flex items-center justify-center gap-3 group font-black tracking-widest uppercase text-xs shadow-xl hover:shadow-emerald-200 transition-all"
                 >
                   {loading ? <Sparkles className="w-5 h-5 animate-spin" /> : (
                     <>
                       Initialize Deployment
-                      <Check className="w-5 h-5" />
+                      <Check className="w-5 h-5 animate-in zoom-in" />
                     </>
                   )}
                 </button>
@@ -455,7 +455,7 @@ export default function CreateSurvey() {
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="w-full py-4 text-slate-500 hover:text-white transition-all font-black tracking-widest uppercase text-[10px] flex items-center justify-center gap-2"
+                  className="w-full py-4 text-slate-400 hover:text-slate-900 transition-all font-black tracking-widest uppercase text-[10px] flex items-center justify-center gap-2"
                 >
                   <ArrowLeft className="w-3 h-3" />
                   Step Back
@@ -466,12 +466,12 @@ export default function CreateSurvey() {
             <AnimatePresence>
               {currentTemplate && currentStep > 2 && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-8 p-4 bg-brand-accent/5 border border-brand-accent/10 rounded-2xl"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="mt-8 p-6 bg-slate-50 border border-slate-100 rounded-3xl"
                 >
-                  <p className="text-[10px] font-black uppercase tracking-widest text-brand-glow mb-1">Active Blueprint</p>
-                  <p className="text-xs font-bold text-white truncate">{currentTemplate.name}</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Active Blueprint</p>
+                  <p className="text-xs font-black text-slate-900 truncate bg-white px-3 py-2 rounded-xl border border-slate-100 shadow-sm">{currentTemplate.name}</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -484,23 +484,23 @@ export default function CreateSurvey() {
 
 function StatCard({ label, value, sub }: { label: string, value: string | number, sub: string }) {
   return (
-    <div className="p-6 rounded-3xl bg-white/5 border border-white/5 space-y-1">
-      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</p>
-      <p className="text-2xl font-display font-black text-white">{value}</p>
-      <p className="text-[10px] font-medium text-slate-600 uppercase tracking-widest">{sub}</p>
+    <div className="p-8 rounded-[2rem] bg-white border border-slate-100 shadow-xl space-y-2 group hover:border-brand-blue/20 transition-all">
+      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-brand-blue transition-colors">{label}</p>
+      <p className="text-3xl font-display font-black text-slate-900">{value}</p>
+      <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">{sub}</p>
     </div>
   );
 }
 
 function StepItem({ num, title, desc, active }: any) {
   return (
-    <div className={`flex gap-4 p-4 rounded-2xl border transition-all ${active ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-white/2 border-white/5'}`}>
-      <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-black shrink-0 ${active ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-slate-600'}`}>
+    <div className={`flex gap-5 p-5 rounded-3xl border transition-all ${active ? 'bg-emerald-50 border-emerald-100' : 'bg-white border-slate-100 shadow-sm'}`}>
+      <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-[10px] font-black shrink-0 shadow-sm ${active ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-400'}`}>
         {num}
       </div>
-      <div className="space-y-0.5">
-        <p className={`text-[10px] font-black uppercase tracking-widest ${active ? 'text-emerald-400' : 'text-slate-400'}`}>{title}</p>
-        <p className="text-[10px] font-medium text-slate-600 leading-tight">{desc}</p>
+      <div className="space-y-1">
+        <p className={`text-[10px] font-black uppercase tracking-widest ${active ? 'text-emerald-700' : 'text-slate-900'}`}>{title}</p>
+        <p className={`text-[10px] font-bold leading-tight ${active ? 'text-emerald-600/70' : 'text-slate-400'}`}>{desc}</p>
       </div>
     </div>
   );

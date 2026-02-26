@@ -79,34 +79,34 @@ export default function FormAssistantModal({ isOpen, onClose, onSave, initialUrl
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm shadow-2xl" onClick={onClose} />
-            <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-                <header className="p-6 border-b border-slate-800 flex justify-between items-center">
-                    <div>
-                        <h2 className="text-xl font-bold text-white">Google Form Assistant</h2>
-                        <p className="text-sm text-slate-400">Map Layer 1 data to specific Google Form fields</p>
+            <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-md shadow-2xl" onClick={onClose} />
+            <div className="relative w-full max-w-2xl bg-white border border-slate-200 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                <header className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                    <div className="text-left">
+                        <h2 className="text-xl font-display font-black text-slate-900">Google Form <span className="text-brand-blue">Assistant</span></h2>
+                        <p className="text-sm font-medium text-slate-400">Map Layer 1 data to specific Google Form fields</p>
                     </div>
-                    <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-full transition">
-                        <X className="w-5 h-5 text-slate-400" />
+                    <button onClick={onClose} className="p-3 hover:bg-white rounded-2xl transition-all border border-transparent hover:border-slate-100 shadow-sm text-slate-400">
+                        <X className="w-5 h-5" />
                     </button>
                 </header>
 
-                <div className="p-6 overflow-y-auto space-y-6">
-                    <section className="space-y-3">
+                <div className="p-8 overflow-y-auto space-y-8 custom-scrollbar">
+                    <section className="space-y-4 text-left">
                         <div className="flex items-center justify-between">
-                            <label className="text-sm font-bold text-purple-400 uppercase tracking-wider">1. Paste Pre-filled URL</label>
+                            <label className="text-[10px] font-black text-brand-blue uppercase tracking-widest ml-1">1. Paste Pre-filled URL</label>
                             <a
                                 href="https://support.google.com/docs/answer/28390b8"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[10px] text-slate-500 hover:text-purple-400 flex items-center gap-1 transition"
+                                className="text-[10px] text-slate-400 hover:text-brand-blue flex items-center gap-1 transition-colors font-bold uppercase tracking-widest"
                             >
                                 <HelpCircle className="w-3 h-3" />
-                                How to get this link?
+                                Documentation
                             </a>
                         </div>
                         <textarea
-                            className="w-full h-24 bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs font-mono text-slate-300 outline-none focus:ring-2 focus:ring-purple-500 transition"
+                            className="w-full h-32 bg-slate-50 border border-slate-200 rounded-2xl p-5 text-xs font-mono text-slate-600 outline-none focus:ring-4 focus:ring-brand-blue/5 focus:border-brand-blue/50 transition-all shadow-inner"
                             placeholder="https://docs.google.com/forms/d/e/.../viewform?entry.123=..."
                             value={rawUrl}
                             onChange={(e) => setRawUrl(e.target.value)}
@@ -114,17 +114,17 @@ export default function FormAssistantModal({ isOpen, onClose, onSave, initialUrl
                     </section>
 
                     {fields.length > 0 && (
-                        <section className="space-y-4">
-                            <label className="text-sm font-bold text-emerald-400 uppercase tracking-wider">2. Map Fields</label>
-                            <div className="space-y-2">
+                        <section className="space-y-4 text-left">
+                            <label className="text-[10px] font-black text-emerald-600 uppercase tracking-widest ml-1">2. Map Fields</label>
+                            <div className="space-y-3">
                                 {fields.map((field, idx) => (
-                                    <div key={field.key} className="flex items-center gap-4 p-3 bg-slate-950 rounded-xl border border-slate-800">
+                                    <div key={field.key} className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm">
                                         <div className="flex-1">
-                                            <p className="text-xs font-bold text-slate-300">{field.label}</p>
-                                            <code className="text-[10px] text-slate-500">{field.key}</code>
+                                            <p className="text-xs font-black text-slate-900 uppercase tracking-tight">{field.label}</p>
+                                            <code className="text-[10px] text-slate-400 font-mono">{field.key}</code>
                                         </div>
                                         <select
-                                            className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white outline-none focus:ring-1 focus:ring-emerald-500"
+                                            className="bg-white border border-slate-200 rounded-xl px-4 py-2 text-xs font-bold text-slate-700 outline-none focus:ring-4 focus:ring-emerald-500/5 focus:border-emerald-500 transition-all cursor-pointer shadow-sm"
                                             value={field.mapping}
                                             onChange={(e) => {
                                                 const newFields = [...fields];
@@ -143,9 +143,9 @@ export default function FormAssistantModal({ isOpen, onClose, onSave, initialUrl
                     )}
 
                     {rawUrl && fields.length === 0 && (
-                        <div className="p-4 bg-amber-500/5 border border-amber-500/20 rounded-xl flex items-start gap-3">
-                            <HelpCircle className="w-5 h-5 text-amber-500 shrink-0" />
-                            <p className="text-xs text-amber-500 leading-relaxed">
+                        <div className="p-5 bg-orange-50 border border-orange-100 rounded-2xl flex items-start gap-4">
+                            <HelpCircle className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
+                            <p className="text-xs text-orange-600 font-medium leading-relaxed">
                                 No pre-fill fields detected. Make sure you use a "Get pre-filled link" from Google Forms
                                 where you've actually typed some placeholder text into the fields.
                             </p>
@@ -153,21 +153,21 @@ export default function FormAssistantModal({ isOpen, onClose, onSave, initialUrl
                     )}
                 </div>
 
-                <footer className="p-6 border-t border-slate-800 bg-slate-900/50 flex items-center justify-between">
-                    <div className="text-[10px] text-slate-500 font-mono truncate max-w-[60%]">
-                        {previewUrl}
+                <footer className="p-8 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
+                    <div className="text-[10px] text-slate-400 font-mono truncate max-w-[50%] bg-white px-3 py-2 rounded-lg border border-slate-100 shadow-inner">
+                        {previewUrl || 'Waiting for valid URL...'}
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex gap-4">
                         <button
                             onClick={onClose}
-                            className="px-4 py-2 text-sm font-bold text-slate-400 hover:text-white transition"
+                            className="px-6 py-2.5 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-colors"
                         >
                             Cancel
                         </button>
                         <button
                             onClick={() => onSave(previewUrl)}
                             disabled={!previewUrl}
-                            className="bg-purple-600 hover:bg-purple-500 disabled:opacity-30 px-6 py-2 rounded-xl text-sm font-bold shadow-lg shadow-purple-900/20 transition flex items-center gap-2"
+                            className="bg-brand-blue hover:bg-blue-700 disabled:opacity-30 px-8 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white shadow-xl hover:shadow-brand-blue/20 transition-all flex items-center gap-2"
                         >
                             <Check className="w-4 h-4" />
                             Apply Mapping

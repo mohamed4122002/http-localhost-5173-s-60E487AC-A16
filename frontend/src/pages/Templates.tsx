@@ -148,28 +148,28 @@ export default function Templates() {
         const sections = layerData?.sections || [];
 
         const config = layer === 1 ? {
-            accent: 'text-brand-glow',
-            bg: 'bg-brand-glow/10',
-            border: 'border-brand-glow/20',
-            shadow: 'shadow-brand-glow/20',
+            accent: 'text-brand-blue',
+            bg: 'bg-brand-blue/10',
+            border: 'border-brand-blue/20',
+            shadow: 'shadow-brand-blue/10',
             title: 'Screening Phase',
             sub: '(Layer 1)',
-            indicator: 'bg-brand-glow/30',
-            indicatorHover: 'group-hover/section:bg-brand-glow',
-            addBtnBorder: 'hover:border-brand-glow/30',
-            addBtnBg: 'hover:bg-brand-glow/5',
-            addBtnText: 'hover:text-brand-glow',
-            newSectionBg: 'bg-brand-glow/5',
-            newSectionBorder: 'border-brand-glow/10',
-            newSectionBorderHover: 'hover:border-brand-glow/30',
-            newSectionBgHover: 'hover:bg-brand-glow/10',
-            newSectionText: 'text-brand-glow',
-            newSectionIconBg: 'bg-brand-glow/10'
+            indicator: 'bg-brand-blue/30',
+            indicatorHover: 'group-hover/section:bg-brand-blue',
+            addBtnBorder: 'hover:border-brand-blue/30',
+            addBtnBg: 'hover:bg-brand-blue/5',
+            addBtnText: 'hover:text-brand-blue',
+            newSectionBg: 'bg-brand-blue/5',
+            newSectionBorder: 'border-brand-blue/10',
+            newSectionBorderHover: 'hover:border-brand-blue/30',
+            newSectionBgHover: 'hover:bg-brand-blue/10',
+            newSectionText: 'text-brand-blue',
+            newSectionIconBg: 'bg-brand-blue/10'
         } : {
             accent: 'text-brand-accent',
             bg: 'bg-brand-accent/10',
             border: 'border-brand-accent/20',
-            shadow: 'shadow-brand-accent/20',
+            shadow: 'shadow-brand-accent/10',
             title: 'Evaluation Modules',
             sub: '(Layer 2)',
             indicator: 'bg-brand-accent/30',
@@ -189,11 +189,11 @@ export default function Templates() {
             <div className="space-y-12">
                 <div className="flex items-center justify-between px-2">
                     <div className="flex items-center gap-4">
-                        <div className={`w-10 h-10 rounded-xl ${config.bg} flex items-center justify-center ${config.accent} font-black border ${config.border} shadow-lg ${config.shadow} transition-all`}>
+                        <div className={`w-10 h-10 rounded-xl ${config.bg} flex items-center justify-center ${config.accent} font-black border ${config.border} shadow-sm transition-all`}>
                             {layer}
                         </div>
-                        <h3 className="text-xl font-display font-black text-white uppercase tracking-wider">
-                            {config.title} <span className="text-slate-500 text-sm ml-2 font-bold">{config.sub}</span>
+                        <h3 className="text-xl font-display font-black text-slate-900 uppercase tracking-wider">
+                            {config.title} <span className="text-slate-400 text-sm ml-2 font-bold">{config.sub}</span>
                         </h3>
                     </div>
                 </div>
@@ -204,7 +204,7 @@ export default function Templates() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         key={sIdx}
-                        className="space-y-8 bg-white/[0.03] rounded-[3rem] p-12 border border-white/10 relative group/section shadow-2xl backdrop-blur-sm"
+                        className="space-y-8 bg-white rounded-[3rem] p-12 border border-slate-100 relative group/section shadow-xl"
                     >
                         <div className="flex justify-between items-center mb-6">
                             <div className="flex-1 flex items-center gap-6">
@@ -212,7 +212,7 @@ export default function Templates() {
                                     <Layers className="w-6 h-6" />
                                 </div>
                                 <div className="flex-1 space-y-1">
-                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-1">Module Area</label>
+                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Module Area</label>
                                     <input
                                         type="text"
                                         value={section.title}
@@ -221,7 +221,7 @@ export default function Templates() {
                                             newSections[sIdx].title = e.target.value;
                                             setCurrentTemplate({ ...currentTemplate, [structureKey]: { ...layerData, sections: newSections } });
                                         }}
-                                        className="bg-transparent text-3xl font-display font-black text-white border-b-2 border-transparent focus:border-brand-glow outline-none pb-2 flex-1 w-full transition-all"
+                                        className="bg-transparent text-3xl font-display font-black text-slate-900 border-b-2 border-transparent focus:border-brand-blue outline-none pb-2 flex-1 w-full transition-all"
                                         placeholder="Name this section..."
                                     />
                                 </div>
@@ -283,9 +283,9 @@ export default function Templates() {
                                 });
                                 setCurrentTemplate({ ...currentTemplate, [structureKey]: { ...layerData, sections: newSections } });
                             }}
-                            className={`w-full py-6 rounded-2xl border-2 border-dashed border-white/5 ${config.addBtnBorder} ${config.addBtnBg} transition-all text-[10px] font-black uppercase tracking-widest text-slate-500 ${config.addBtnText} flex items-center justify-center gap-3 group/addQ`}
+                            className={`w-full py-6 rounded-2xl border-2 border-dashed border-slate-100 ${config.addBtnBorder} ${config.addBtnBg} transition-all text-[10px] font-black uppercase tracking-widest text-slate-400 ${config.addBtnText} flex items-center justify-center gap-3 group/addQ`}
                         >
-                            <div className="p-2 rounded-lg bg-white/5 group-hover/addQ:bg-white/10 transition-colors">
+                            <div className="p-2 rounded-lg bg-slate-50 group-hover/addQ:bg-white transition-colors">
                                 <Plus className="w-4 h-4" />
                             </div>
                             Append New Logic Probe
@@ -326,10 +326,10 @@ export default function Templates() {
             {/* Header Section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-4xl font-display font-extrabold tracking-tight">
-                        Template <span className="text-brand-glow">Explorer</span>
+                    <h1 className="text-4xl font-display font-extrabold tracking-tight text-slate-900">
+                        Template <span className="text-brand-blue">Explorer</span>
                     </h1>
-                    <p className="mt-2 text-slate-400 max-w-xl">
+                    <p className="mt-2 text-slate-500 max-w-xl font-medium">
                         Design and version-control your multi-layered survey schemas.
                     </p>
                 </div>
@@ -419,27 +419,27 @@ export default function Templates() {
 
                 {/* Info panel */}
                 <div className="space-y-6">
-                    <div className="glass-card rounded-3xl p-8 border border-white/5">
+                    <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="p-2 rounded-xl bg-brand-accent/10 text-brand-accent">
+                            <div className="p-2 rounded-xl bg-brand-blue/10 text-brand-blue">
                                 <Sparkles className="w-5 h-5" />
                             </div>
-                            <h3 className="font-bold font-display">Optimization Tip</h3>
+                            <h3 className="font-bold font-display text-slate-900">Optimization Tip</h3>
                         </div>
-                        <p className="text-sm text-slate-400 leading-relaxed">
-                            Use <code className="text-brand-glow">Layer 1</code> for rapid qualification.
+                        <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                            Use <code className="text-brand-blue font-bold">Layer 1</code> for rapid qualification.
                             Keep it under 5 questions for maximum participant retention.
                         </p>
                     </div>
 
-                    <div className="glass-card rounded-3xl p-8 border border-white/5">
+                    <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="p-2 rounded-xl bg-emerald-400/10 text-emerald-400">
+                            <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600">
                                 <Layers className="w-5 h-5" />
                             </div>
-                            <h3 className="font-bold font-display">Schema Versioning</h3>
+                            <h3 className="font-bold font-display text-slate-900">Schema Versioning</h3>
                         </div>
-                        <p className="text-sm text-slate-400 leading-relaxed">
+                        <p className="text-sm text-slate-500 leading-relaxed font-medium">
                             Each save creates a new immutable version. You can rollback any live campaign to a previous schema state instantly.
                         </p>
                     </div>
@@ -462,17 +462,17 @@ export default function Templates() {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.98, y: 30 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="relative w-full max-w-6xl h-[92vh] glass-card rounded-[3.5rem] border border-white/10 shadow-2xl overflow-hidden flex flex-col bg-slate-950/80"
+                            className="relative w-full max-w-6xl h-[92vh] bg-slate-50 rounded-[3.5rem] border border-slate-200 shadow-2xl overflow-hidden flex flex-col"
                         >
                             {/* Editor Header */}
-                            <div className="flex flex-col border-b border-white/5 bg-white/5">
+                            <div className="flex flex-col border-b border-slate-100 bg-white">
                                 <div className="flex justify-between items-center px-12 py-8">
                                     <div>
-                                        <h2 className="text-3xl font-display font-black text-white">
-                                            Template <span className="text-brand-glow">Architect</span>
+                                        <h2 className="text-3xl font-display font-black text-slate-900">
+                                            Template <span className="text-brand-blue">Architect</span>
                                         </h2>
                                         <div className="flex items-center gap-2 mt-1">
-                                            <span className="text-[10px] text-slate-500 uppercase tracking-widest font-black">Design Studio</span>
+                                            <span className="text-[10px] text-slate-400 uppercase tracking-widest font-black">Design Studio</span>
                                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                                         </div>
                                     </div>
@@ -483,7 +483,7 @@ export default function Templates() {
                                                 e.stopPropagation();
                                                 handleSubmit(e);
                                             }}
-                                            className="btn-premium py-4 px-10 text-xs font-black flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 shadow-xl shadow-emerald-500/20 group/commit"
+                                            className="py-4 px-10 text-xs font-black flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl shadow-xl shadow-emerald-500/20 group/commit transition-all"
                                         >
                                             <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center group-hover/commit:scale-110 transition-transform">
                                                 <CheckCircle2 className="w-5 h-5 text-white" />
@@ -496,7 +496,7 @@ export default function Templates() {
                                                 e.stopPropagation();
                                                 setIsEditing(false);
                                             }}
-                                            className="p-3 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors"
+                                            className="p-3 rounded-2xl bg-slate-100 text-slate-400 hover:bg-slate-200 hover:text-slate-600 transition-colors"
                                         >
                                             <X className="w-6 h-6" />
                                         </button>
@@ -508,21 +508,21 @@ export default function Templates() {
                                     <button
                                         type="button"
                                         onClick={(e) => { e.stopPropagation(); setActiveLayer(1); }}
-                                        className={`pb-4 px-2 text-sm font-black uppercase tracking-widest transition-all relative ${activeLayer === 1 ? 'text-brand-glow' : 'text-slate-500 hover:text-slate-300'}`}
+                                        className={`pb-4 px-2 text-sm font-black uppercase tracking-widest transition-all relative ${activeLayer === 1 ? 'text-brand-blue' : 'text-slate-400 hover:text-slate-600'}`}
                                     >
                                         1. Screening (L1)
                                         {activeLayer === 1 && (
-                                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-1 bg-brand-glow rounded-full shadow-[0_0_10px_rgba(var(--brand-glow-rgb),0.5)]" />
+                                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-1 bg-brand-blue rounded-full" />
                                         )}
                                     </button>
                                     <button
                                         type="button"
                                         onClick={(e) => { e.stopPropagation(); setActiveLayer(2); }}
-                                        className={`pb-4 px-2 text-sm font-black uppercase tracking-widest transition-all relative ${activeLayer === 2 ? 'text-brand-accent' : 'text-slate-500 hover:text-slate-300'}`}
+                                        className={`pb-4 px-2 text-sm font-black uppercase tracking-widest transition-all relative ${activeLayer === 2 ? 'text-brand-accent' : 'text-slate-400 hover:text-slate-600'}`}
                                     >
                                         2. Evaluation (L2)
                                         {activeLayer === 2 && (
-                                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-1 bg-brand-accent rounded-full shadow-[0_0_10px_rgba(var(--brand-accent-rgb),0.5)]" />
+                                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-1 bg-brand-accent rounded-full" />
                                         )}
                                     </button>
                                 </div>
@@ -531,16 +531,16 @@ export default function Templates() {
                             <div className="flex-1 overflow-y-auto custom-scrollbar p-12">
                                 <div className="max-w-4xl mx-auto space-y-12 pb-32">
                                     {/* Global Metadata */}
-                                    <div className="glass-card rounded-[2.5rem] p-10 border border-white/10 bg-white/5 space-y-8 relative overflow-hidden">
-                                        <div className="absolute top-0 left-0 w-2 h-full bg-brand-glow shadow-[0_0_20px_rgba(var(--brand-glow-rgb),0.5)]" />
+                                    <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 space-y-8 relative overflow-hidden shadow-sm">
+                                        <div className="absolute top-0 left-0 w-2 h-full bg-brand-blue" />
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                             <div className="space-y-3">
-                                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Template Identity</label>
+                                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Template Identity</label>
                                                 <input
                                                     type="text"
                                                     value={currentTemplate.name}
                                                     onChange={e => setCurrentTemplate({ ...currentTemplate, name: e.target.value })}
-                                                    className="w-full bg-transparent text-4xl font-display font-black border-b-2 border-white/10 focus:border-brand-glow outline-none pb-4 transition-all placeholder:text-white/10"
+                                                    className="w-full bg-transparent text-4xl font-display font-black text-slate-900 border-b-2 border-slate-50 focus:border-brand-blue outline-none pb-4 transition-all placeholder:text-slate-100"
                                                     placeholder="Untitled Schema"
                                                 />
                                             </div>
@@ -579,12 +579,12 @@ export default function Templates() {
 
                             {/* Floating Metadata Indicator */}
                             <div className="absolute bottom-8 right-12 z-50">
-                                <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-3 flex items-center gap-4 text-xs font-bold text-slate-400 shadow-2xl">
-                                    <div className="flex items-center gap-2 pr-4 border-r border-white/10">
-                                        <span className="text-brand-glow">L1:</span> {(currentTemplate as any).layer1_structure?.sections?.length || 0} Sec
+                                <div className="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-2xl px-6 py-3 flex items-center gap-4 text-xs font-bold text-slate-500 shadow-xl">
+                                    <div className="flex items-center gap-2 pr-4 border-r border-slate-100">
+                                        <span className="text-brand-blue font-black">L1:</span> {(currentTemplate as any).layer1_structure?.sections?.length || 0} Sec
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <span className="text-brand-accent">L2:</span> {(currentTemplate as any).layer2_structure?.sections?.length || 0} Sec
+                                        <span className="text-brand-accent font-black">L2:</span> {(currentTemplate as any).layer2_structure?.sections?.length || 0} Sec
                                     </div>
                                 </div>
                             </div>
@@ -609,41 +609,41 @@ export default function Templates() {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="relative w-full max-w-md bg-brand-dark/80 backdrop-blur-3xl h-full border-l border-white/10 shadow-2xl p-10 flex flex-col"
+                            className="relative w-full max-w-md bg-white h-full border-l border-slate-200 shadow-2xl p-10 flex flex-col"
                         >
                             <div className="flex justify-between items-center mb-10">
                                 <div>
-                                    <h2 className="text-2xl font-display font-black">{showHistoryName}</h2>
-                                    <p className="text-xs text-slate-500 uppercase font-black tracking-widest mt-1">Audit Trail & Versioning</p>
+                                    <h2 className="text-2xl font-display font-black text-slate-900">{showHistoryName}</h2>
+                                    <p className="text-xs text-slate-400 uppercase font-black tracking-widest mt-1">Audit Trail & Versioning</p>
                                 </div>
-                                <button onClick={() => setShowHistoryName(null)} className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                                <button onClick={() => setShowHistoryName(null)} className="p-2 rounded-full bg-slate-50 text-slate-400 hover:bg-slate-100 transition-colors">
                                     <X className="w-5 h-5" />
                                 </button>
                             </div>
 
                             <div className="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
                                 {history.map((h, i) => (
-                                    <div key={h._id} className={`p-6 rounded-2xl border transition-all ${i === 0 ? 'bg-brand-accent/10 border-brand-accent/30' : 'bg-white/5 border-white/5'}`}>
+                                    <div key={h._id} className={`p-6 rounded-2xl border transition-all ${i === 0 ? 'bg-brand-blue/5 border-brand-blue/30' : 'bg-slate-50 border-slate-100'}`}>
                                         <div className="flex justify-between items-start mb-4">
                                             <div className="flex items-center gap-2">
-                                                <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black ${i === 0 ? 'bg-brand-accent text-white' : 'bg-slate-800 text-slate-400'}`}>
+                                                <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black ${i === 0 ? 'bg-brand-blue text-white' : 'bg-slate-200 text-slate-500'}`}>
                                                     v{h.version}
                                                 </span>
-                                                {i === 0 && <span className="text-[10px] font-black uppercase text-brand-glow bg-brand-glow/10 px-2 py-0.5 rounded-full">Active</span>}
+                                                {i === 0 && <span className="text-[10px] font-black uppercase text-brand-blue bg-brand-blue/10 px-2 py-0.5 rounded-full">Active</span>}
                                             </div>
-                                            <span className="text-[10px] font-bold text-slate-500">
+                                            <span className="text-[10px] font-bold text-slate-400">
                                                 {new Date(h.created_at).toLocaleDateString()}
                                             </span>
                                         </div>
 
-                                        <div className="text-xs text-slate-400 mb-6 font-medium">
-                                            Contains {h.layer1_questions.length} logical probes for the <span className="text-slate-200">{h.type}</span> flow.
+                                        <div className="text-xs text-slate-500 mb-6 font-medium">
+                                            Contains {h.layer1_questions.length} logical probes for the <span className="text-slate-900 font-bold">{h.type}</span> flow.
                                         </div>
 
                                         <button
                                             onClick={() => handleRollback(h._id)}
                                             disabled={i === 0}
-                                            className="w-full py-2.5 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all"
+                                            className="w-full py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-sm"
                                         >
                                             <RotateCcw className="w-3 h-3" />
                                             Restore Point
@@ -680,30 +680,30 @@ function TemplateCard({ template, idx, onEdit, onHistory, onDelete }: any) {
             </div>
 
             <div className="relative z-10 flex-1">
-                <h3 className="text-xl font-display font-black text-white mb-2 group-hover:text-brand-glow transition-colors">{template.name}</h3>
-                <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mb-6">{template.type.replace('_', ' ')}</p>
+                <h3 className="text-xl font-display font-black text-slate-900 mb-2 group-hover:text-brand-blue transition-colors">{template.name}</h3>
+                <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mb-6">{template.type.replace('_', ' ')}</p>
 
-                <div className="flex items-center gap-4 py-4 border-t border-white/5 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <div className="flex items-center gap-4 py-4 border-t border-slate-50 text-[10px] font-black uppercase tracking-widest text-slate-400">
                     <div className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-brand-cyan" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-brand-blue" />
                         {template.layer1_questions.length} Probes
                     </div>
                     <div className="flex items-center gap-1.5">
-                        <Layers className="w-3.5 h-3.5 text-brand-glow" />
+                        <div className="w-3.5 h-3.5 rounded-full bg-brand-blue/10 border border-brand-blue/20" />
                         L1 Active
                     </div>
                 </div>
             </div>
 
             <div className="relative z-10 mt-6 grid grid-cols-3 gap-2">
-                <button onClick={onEdit} className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center group/btn transition-all">
-                    <Edit3 className="w-4 h-4 text-slate-400 group-hover/btn:text-white" />
+                <button onClick={onEdit} className="p-2.5 rounded-xl bg-slate-50 hover:bg-brand-blue/10 flex items-center justify-center group/btn transition-all text-slate-400 hover:text-brand-blue">
+                    <Edit3 className="w-4 h-4" />
                 </button>
-                <button onClick={onHistory} className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center group/btn transition-all">
-                    <History className="w-4 h-4 text-slate-400 group-hover/btn:text-white" />
+                <button onClick={onHistory} className="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 flex items-center justify-center group/btn transition-all text-slate-400 hover:text-slate-600">
+                    <History className="w-4 h-4" />
                 </button>
-                <button onClick={onDelete} className="p-2.5 rounded-xl bg-white/5 hover:bg-rose-500/10 flex items-center justify-center group/btn transition-all">
-                    <Trash2 className="w-4 h-4 text-slate-500 group-hover/btn:text-rose-400" />
+                <button onClick={onDelete} className="p-2.5 rounded-xl bg-slate-50 hover:bg-rose-50 flex items-center justify-center group/btn transition-all text-slate-400 hover:text-rose-500">
+                    <Trash2 className="w-4 h-4" />
                 </button>
             </div>
         </motion.div>
